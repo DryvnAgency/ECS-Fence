@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Thanks — we'll be right with you · ECS Fence</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#16181C;--cream:#F7F4EE;--red:#C8232F;--red-deep:#A11923;
+  --paper:#EFEAE0;--line:rgba(22,24,28,.10);--muted:rgba(22,24,28,.62);
+  --shadow:0 4px 24px -8px rgba(22,24,28,.18);
+  --shadow-lg:0 24px 60px -20px rgba(22,24,28,.35);
+  --ease:cubic-bezier(0.22,1,0.36,1);
+  --font-display:"Fraunces",Georgia,serif;
+  --font-serif-i:"Fraunces",Georgia,serif;
+  --font-sans:"Inter",system-ui,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:var(--cream);color:var(--ink);font-family:var(--font-sans);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1080px;margin:0 auto;padding:0 32px}
+@media(max-width:560px){.wrap{padding:0 20px}}
+.em-i{font-family:var(--font-serif-i);font-style:italic;font-weight:400}
+
+/* nav */
+nav.top{position:sticky;top:0;z-index:50;background:rgba(247,244,238,.92);border-bottom:1px solid var(--line);backdrop-filter:saturate(180%) blur(14px);-webkit-backdrop-filter:saturate(180%) blur(14px)}
+nav.top .wrap{display:flex;align-items:center;justify-content:space-between;height:78px;max-width:1280px}
+.brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--ink)}
+.brand img{width:40px;height:40px;object-fit:contain}
+.brand-name{font-family:var(--font-display);font-size:22px;font-weight:600;letter-spacing:-.01em}
+.brand-tag{font-size:11px;color:var(--muted);letter-spacing:.06em;text-transform:uppercase;margin-top:1px}
+.phone-link{display:inline-flex;align-items:center;gap:8px;text-decoration:none;color:var(--ink);font-weight:600;font-size:15px}
+.phone-link svg{width:16px;height:16px;color:var(--red)}
+@media(max-width:560px){nav.top .wrap{height:64px}.brand img{width:34px;height:34px}.brand-name{font-size:18px}.brand-tag{display:none}}
+
+/* HERO confirmation */
+.confirm{padding:80px 0 60px;text-align:center;position:relative}
+.confirm::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at top, rgba(200,35,47,.06), transparent 60%);pointer-events:none}
+.check-wrap{position:relative;z-index:2;display:inline-grid;place-items:center;width:96px;height:96px;border-radius:50%;background:var(--ink);color:var(--cream);margin-bottom:32px;box-shadow:var(--shadow-lg);animation:popIn .6s var(--ease) both}
+.check-wrap svg{width:46px;height:46px;animation:drawCheck .7s var(--ease) .2s both}
+.check-wrap::after{content:"";position:absolute;inset:-6px;border-radius:50%;border:2px solid var(--red);opacity:0;animation:ring 2.4s ease-out .4s infinite}
+@keyframes popIn{from{transform:scale(.4);opacity:0}to{transform:scale(1);opacity:1}}
+@keyframes drawCheck{from{stroke-dashoffset:30}to{stroke-dashoffset:0}}
+@keyframes ring{0%{transform:scale(1);opacity:.6}100%{transform:scale(1.5);opacity:0}}
+
+.confirm .eyebrow{display:inline-flex;align-items:center;gap:10px;color:var(--red);font-size:12px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;margin-bottom:18px;position:relative;z-index:2}
+.confirm .eyebrow::before{content:"";width:24px;height:2px;background:var(--red)}
+.confirm h1{font-family:var(--font-display);font-size:clamp(48px,7vw,88px);line-height:.96;font-weight:500;margin-bottom:24px;letter-spacing:-.015em;position:relative;z-index:2}
+.confirm h1 .red{color:var(--red)}
+.confirm .lede{font-family:var(--font-serif-i);font-style:italic;font-size:clamp(20px,2.4vw,28px);line-height:1.45;color:rgba(22,24,28,.78);max-width:680px;margin:0 auto 16px;position:relative;z-index:2;text-wrap:pretty}
+.confirm .micro-lede{font-size:15.5px;color:var(--muted);max-width:560px;margin:0 auto;position:relative;z-index:2}
+
+/* response window card */
+.response{margin:48px auto 0;max-width:640px;background:var(--ink);color:var(--cream);border-radius:14px;padding:32px 36px;display:flex;align-items:center;gap:24px;box-shadow:var(--shadow-lg);position:relative;z-index:2;text-align:left}
+.response .clock{flex-shrink:0;width:64px;height:64px;border-radius:50%;border:2px solid rgba(247,244,238,.2);display:grid;place-items:center;background:rgba(247,244,238,.04)}
+.response .clock svg{width:32px;height:32px}
+.response .live-dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:#3DD68C;margin-right:8px;animation:pulse 2s infinite;vertical-align:middle}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.6;transform:scale(.85)}}
+.response .label{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:rgba(247,244,238,.7);font-weight:700;margin-bottom:6px}
+.response .title{font-family:var(--font-display);font-size:24px;font-weight:500;line-height:1.15;margin-bottom:6px}
+.response .sub{font-size:14.5px;color:rgba(247,244,238,.78);line-height:1.45}
+@media(max-width:560px){
+  .response{padding:24px 22px;gap:18px;flex-direction:column;text-align:center}
+  .response .title{font-size:20px}
+}
+
+/* section header */
+.sect-head{text-align:center;padding:80px 0 32px}
+.sect-head .micro{display:inline-flex;align-items:center;gap:10px;color:var(--red);font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;margin-bottom:18px}
+.sect-head .micro::before{content:"";width:24px;height:2px;background:var(--red)}
+.sect-head h2{font-family:var(--font-display);font-size:clamp(36px,5vw,60px);line-height:1;font-weight:500;letter-spacing:-.015em;margin-bottom:14px}
+.sect-head h2 .em-i{color:var(--red)}
+.sect-head .kicker{font-size:16.5px;color:var(--muted);max-width:620px;margin:0 auto;text-wrap:pretty}
+
+/* prep checklist */
+.prep{padding:24px 0 100px}
+.prep-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;margin-top:24px}
+@media(max-width:880px){.prep-grid{grid-template-columns:1fr}}
+.prep-card{background:#fff;border:1px solid var(--line);border-radius:12px;padding:30px 28px;transition:transform .35s var(--ease),box-shadow .35s var(--ease),border-color .35s var(--ease);position:relative;overflow:hidden}
+.prep-card::before{content:"";position:absolute;left:0;top:0;width:3px;height:100%;background:var(--red);transform:scaleY(0);transform-origin:top;transition:transform .4s var(--ease)}
+.prep-card:hover{transform:translateY(-3px);box-shadow:var(--shadow);border-color:rgba(22,24,28,.18)}
+.prep-card:hover::before{transform:scaleY(1)}
+.prep-num{font-family:var(--font-display);font-size:14px;font-weight:600;color:var(--red);letter-spacing:.1em;margin-bottom:14px;display:flex;align-items:center;gap:10px}
+.prep-num span{display:inline-grid;place-items:center;width:28px;height:28px;border-radius:50%;background:rgba(200,35,47,.1);font-size:13px}
+.prep-card h3{font-family:var(--font-display);font-size:24px;font-weight:500;line-height:1.15;margin-bottom:10px;letter-spacing:-.01em}
+.prep-card .desc{font-size:15px;color:var(--muted);line-height:1.55;margin-bottom:14px}
+.prep-card .why{font-size:13.5px;color:var(--ink);font-weight:500;display:flex;gap:10px;align-items:flex-start;padding:12px 14px;background:var(--paper);border-radius:6px;line-height:1.45}
+.prep-card .why svg{flex-shrink:0;width:16px;height:16px;margin-top:2px;color:var(--red)}
+.prep-card .why b{font-weight:700}
+
+/* what to expect timeline */
+.timeline{background:var(--ink);color:var(--cream);padding:90px 0;position:relative;overflow:hidden}
+.timeline::before{content:"NEXT";position:absolute;font-family:var(--font-display);font-style:italic;font-weight:400;font-size:clamp(220px,32vw,420px);color:rgba(247,244,238,.04);top:50%;right:-2%;transform:translateY(-50%);pointer-events:none;letter-spacing:-.04em}
+.timeline .sect-head{padding-top:0}
+.timeline .sect-head .micro{color:var(--red)}
+.timeline .sect-head h2{color:var(--cream)}
+.timeline .sect-head .kicker{color:rgba(247,244,238,.7)}
+.tl{position:relative;z-index:2;margin-top:40px;display:flex;flex-direction:column;gap:0}
+.tl-item{display:grid;grid-template-columns:140px 1fr;gap:32px;padding:24px 0;border-top:1px solid rgba(247,244,238,.1);align-items:start}
+.tl-item:last-child{border-bottom:1px solid rgba(247,244,238,.1)}
+.tl-when{font-family:var(--font-display);font-size:20px;font-weight:500;color:var(--red);letter-spacing:-.01em}
+.tl-what h4{font-family:var(--font-display);font-weight:500;font-size:22px;line-height:1.2;margin-bottom:6px;letter-spacing:-.01em}
+.tl-what p{font-size:15px;color:rgba(247,244,238,.78);line-height:1.55}
+@media(max-width:680px){
+  .tl-item{grid-template-columns:1fr;gap:6px;padding:20px 0}
+  .tl-when{font-size:14px;letter-spacing:.05em;text-transform:uppercase}
+  .tl-what h4{font-size:19px}
+}
+
+/* sticky reach-out bar */
+.reach{padding:80px 0 100px;text-align:center}
+.reach h2{font-family:var(--font-display);font-size:clamp(32px,4.5vw,52px);line-height:1.05;font-weight:500;letter-spacing:-.015em;margin-bottom:14px}
+.reach h2 .em-i{color:var(--red)}
+.reach p{font-size:16px;color:var(--muted);max-width:520px;margin:0 auto 28px;text-wrap:pretty}
+.reach-actions{display:inline-flex;flex-wrap:wrap;gap:12px;justify-content:center}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:15px 26px;border-radius:999px;font-family:var(--font-sans);font-weight:600;font-size:14.5px;text-decoration:none;transition:all .25s var(--ease);border:1.5px solid transparent;cursor:pointer;letter-spacing:.01em}
+.btn svg{width:17px;height:17px}
+.btn-primary{background:var(--red);color:var(--cream)}
+.btn-primary:hover{background:var(--red-deep);transform:translateY(-1px);box-shadow:0 12px 24px -8px rgba(200,35,47,.45)}
+.btn-ghost{background:transparent;color:var(--ink);border-color:var(--ink)}
+.btn-ghost:hover{background:var(--ink);color:var(--cream)}
+
+footer{background:var(--paper);padding:30px 0;border-top:1px solid var(--line);font-size:13.5px;color:var(--muted);text-align:center}
+footer a{color:var(--ink);text-decoration:none;font-weight:500}
+footer a:hover{color:var(--red)}
+</style>
+</head>
+<body>
+
+<nav class="top">
+  <div class="wrap">
+    <a href="index.html" class="brand">
+      <img src="../brand/logo-primary-dark.png" alt="ECS Fence"/>
+      <div>
+        <div class="brand-name">ECS Fence</div>
+        <div class="brand-tag">Crafted &amp; built to last</div>
+      </div>
+    </a>
+    <a href="tel:7575974513" class="phone-link">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+      (757) 597-4513
+    </a>
+  </div>
+</nav>
+
+<!-- CONFIRMATION -->
+<section class="confirm">
+  <div class="wrap">
+    <div class="check-wrap" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="stroke-dasharray:30">
+        <polyline points="20 6 9 17 4 12"/>
+      </svg>
+    </div>
+    <div class="eyebrow">Got it · Request received</div>
+    <h1>Thanks. <span class="em-i red">We'll be right with you.</span></h1>
+    <p class="lede">Edgar (or someone from our crew) will reach out personally — usually within an hour during business hours, first thing the next morning if it's late.</p>
+    <p class="micro-lede">No call center. No drip campaign. No "schedule a discovery call" link. A real person, with the answers.</p>
+
+    <div class="response">
+      <div class="clock" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+      </div>
+      <div>
+        <div class="label"><span class="live-dot"></span>Typical response time</div>
+        <div class="title">Within 1 hour · 8am – 6pm CT</div>
+        <div class="sub">After hours? You'll hear from us first thing the next morning. If it's an emergency repair, just call the number above and Edgar will pick up.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PREP CHECKLIST -->
+<div class="sect-head">
+  <div class="wrap">
+    <div class="micro">Before we walk the line</div>
+    <h2>Five quick things to <span class="em-i">think about.</span></h2>
+    <p class="kicker">None of this is required — but the more clarity you bring to the walkthrough, the tighter the quote, the faster the build, and the less back-and-forth later.</p>
+  </div>
+</div>
+
+<section class="prep">
+  <div class="wrap">
+    <div class="prep-grid">
+
+      <div class="prep-card">
+        <div class="prep-num"><span>01</span>The why</div>
+        <h3>What's the fence solving?</h3>
+        <p class="desc">Privacy from a new build next door. A dog that's already escaped twice. Pool inspection in three weeks. A house going on the market in spring.</p>
+        <div class="why"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg><span><b>Why it matters:</b> The "why" tells us the right material, height, and code requirements before we even pull a tape measure.</span></div>
+      </div>
+
+      <div class="prep-card">
+        <div class="prep-num"><span>02</span>The line</div>
+        <h3>Know roughly where it goes.</h3>
+        <p class="desc">Survey stakes still in the ground? Property lines marked? Old fence to follow? If you have a plat or survey PDF on your closing docs, dig it up — text it to (757) 597-4513 ahead of time.</p>
+        <div class="why"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg><span><b>Why it matters:</b> Saves 30 minutes of detective work the day we walk it. We'll still verify on-site — but we'll be fast about it.</span></div>
+      </div>
+
+      <div class="prep-card">
+        <div class="prep-num"><span>03</span>The HOA / utilities</div>
+        <h3>Any rules in play?</h3>
+        <p class="desc">HOA covenants on style, height, or color? Underground utilities you already know about (sprinklers, gas line to the grill, low-voltage)? Easements?</p>
+        <div class="why"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg><span><b>Heads up:</b> HOA paperwork is yours to submit — your board will want it from the homeowner directly. We'll provide spec sheets, drawings, and color samples for your packet. We always call 811 for utility locates before we dig.</span></div>ity locates before we dig — but if you already know about a private line, that's gold. Avoids a $400 sprinkler repair.</span></div>
+      </div>
+
+      <div class="prep-card">
+        <div class="prep-num"><span>04</span>The look</div>
+        <h3>Bring a photo or two.</h3>
+        <p class="desc">A neighbor's fence you love. A Pinterest board. An Instagram screenshot. "I want it to look like that, but without the lattice top." Vague is fine — visual is better than verbal.</p>
+        <div class="why"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg><span><b>Why it matters:</b> Saves you from picking from a brochure of options that don't include the one you actually want.</span></div>
+      </div>
+
+      <div class="prep-card">
+        <div class="prep-num"><span>05</span>The timeline</div>
+        <h3>When do you need it done?</h3>
+        <p class="desc">Closing date. Pool inspection. Puppy arriving. Wedding in the backyard. Just "this summer." Hard deadline or flexible?</p>
+        <div class="why"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg><span><b>Why it matters:</b> Material lead times vary (cedar = 3-5 days, ornamental aluminum = 2-3 weeks). Knowing your deadline up front means we can spec around it instead of rushing materials.</span></div>
+      </div>
+
+      <div class="prep-card">
+        <div class="prep-num"><span>06</span>The decision-makers</div>
+        <h3>Who else has a say?</h3>
+        <p class="desc">Spouse, partner, neighbor on a shared line, business partner, board approval? If anyone else needs to weigh in, the walkthrough is the easiest time to get them in the loop.</p>
+        <div class="why"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg><span><b>Why it matters:</b> Saves a second visit. Same-day quote means same-day decision — if everyone who needs to see it has seen it.</span></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- WHAT HAPPENS NEXT TIMELINE -->
+<section class="timeline">
+  <div class="wrap">
+    <div class="sect-head">
+      <div class="micro">What happens next</div>
+      <h2>From this page to <span class="em-i">final latch.</span></h2>
+      <p class="kicker">Here's exactly what to expect — no mystery meetings, no follow-up traps.</p>
+    </div>
+
+    <div class="tl">
+      <div class="tl-item">
+        <div class="tl-when">Within 1 hour</div>
+        <div class="tl-what">
+          <h4>We reach out personally.</h4>
+          <p>A text or call from Edgar (or someone on the crew who knows the job). We'll confirm a 30-minute window that works for you and answer any quick questions before we drive out.</p>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-when">2–5 days out</div>
+        <div class="tl-what">
+          <h4>The walkthrough.</h4>
+          <p>We meet you on-site. Walk the line together. Take measurements. Listen. Look at any photos you've collected. Talk through materials, height, gates, hardware. ~30 minutes.</p>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-when">Within 24 hrs</div>
+        <div class="tl-what">
+          <h4>Written quote in your inbox.</h4>
+          <p>We pull pricing from our suppliers and email you a written quote within 24 hours of the walkthrough. Itemized: materials, labor, haul-off, permits, locates. Yours to keep, no obligation, take a week to compare.</p>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-when">When you're ready</div>
+        <div class="tl-what">
+          <h4>50% deposit locks the slot.</h4>
+          <p>Triggers the material order. Most installs run 2–4 weeks out in season. We'll give you a real install window — not a vague "spring sometime."</p>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-when">Install day(s)</div>
+        <div class="tl-what">
+          <h4>Owner on site. Job done right.</h4>
+          <p>Edgar's on every install. Most residential jobs are 1–3 days. We clean up better than we found it. Final 50% due the day we finish — not before.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REACH OUT NOW -->
+<section class="reach">
+  <div class="wrap">
+    <h2>Need to reach us <span class="em-i">sooner?</span></h2>
+    <p>Got something to add to your request, or thought of another question? Text or call — we always pick up faster than email.</p>
+    <div class="reach-actions">
+      <a href="sms:+17575974513?&body=Hi%20Edgar%2C%20I%20just%20submitted%20a%20walkthrough%20request%20%E2%80%94%20wanted%20to%20add%3A%20" class="btn btn-primary">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        Text Edgar
+      </a>
+      <a href="tel:7575974513" class="btn btn-ghost">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        Call (757) 597-4513
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    ECS Fence · Omaha · Papillion · Bellevue · <a href="mailto:ecsfence@outlook.com">ecsfence@outlook.com</a> · <a href="index.html">Back to home</a>
+  </div>
+</footer>
+
+</body>
+</html>

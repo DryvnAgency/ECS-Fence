@@ -1,0 +1,1023 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Book a free walkthrough · ECS Fence</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Serif+Display:ital@0;1&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style id="design-tokens">
+/* ECS Fence — Design Tokens
+   Drop into any page: <link rel="stylesheet" href="colors_and_type.css">
+   Then use the CSS vars / semantic classes below. */
+
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Serif+Display:ital@0;1&family=Outfit:wght@300;400;500;600;700&display=swap');
+
+:root {
+  /* ─── Color ─────────────────────────────────────────────── */
+  --cream:        #F7F4EE;   /* page bg — newsprint warm */
+  --cream-soft:   #FBF9F4;   /* alternate section */
+  --cream-dark:   #EFEBE2;   /* deeper alt — stats, included */
+  --paper:        #FFFFFF;   /* cards, pills */
+  --ink:          #16181C;   /* primary text, dark section */
+  --ink-soft:     #2A2D33;   /* heavy body */
+  --red:          #C8232F;   /* THE accent — one word per headline */
+  --red-dark:     #9E1820;   /* primary-button hover */
+  --red-soft:     #FCE9EB;   /* icon-tile fill, callout strip */
+  --dim:          #6B6E78;   /* captions, fine print */
+  --line:         rgba(22,24,28,.08);
+  --line-strong:  rgba(22,24,28,.14);
+
+  /* Semantic foreground / background aliases */
+  --fg1: var(--ink);
+  --fg2: var(--ink-soft);
+  --fg3: var(--dim);
+  --bg1: var(--cream);
+  --bg2: var(--cream-soft);
+  --bg3: var(--cream-dark);
+  --accent: var(--red);
+  --accent-fg: var(--cream);
+
+  /* ─── Type families ──────────────────────────────────────── */
+  --font-display: 'Bebas Neue', 'Arial Black', sans-serif;
+  --font-serif-i: 'DM Serif Display', Georgia, serif;
+  --font-ui:      'Outfit', Helvetica, Arial, sans-serif;
+
+  /* ─── Type sizes (fluid where it matters) ────────────────── */
+  --fs-h1: clamp(64px, 8.5vw, 128px);
+  --fs-h2: clamp(44px, 5.5vw, 72px);
+  --fs-h3: 32px;
+  --fs-h4: 24px;
+  --fs-lede: 19px;
+  --fs-body: 15px;
+  --fs-small: 13px;
+  --fs-micro: 11px;
+  --fs-stat: 60px;
+
+  /* ─── Spacing ────────────────────────────────────────────── */
+  --sp-1: 4px;
+  --sp-2: 8px;
+  --sp-3: 12px;
+  --sp-4: 16px;
+  --sp-5: 24px;
+  --sp-6: 32px;
+  --sp-7: 48px;
+  --sp-8: 64px;
+  --sp-9: 104px;          /* default section padding */
+
+  /* ─── Radii ──────────────────────────────────────────────── */
+  --r-sm: 4px;            /* buttons, micro tags, callouts */
+  --r-md: 6px;            /* cards, hero visual, services */
+  --r-lg: 10px;           /* icon tiles inside cards */
+  --r-pill: 999px;        /* trust pills only */
+
+  /* ─── Borders ────────────────────────────────────────────── */
+  --border: 1px solid var(--line);
+  --border-strong: 1px solid var(--line-strong);
+  --border-accent-top: 3px solid var(--red);
+
+  /* ─── Shadows ────────────────────────────────────────────── */
+  --shadow:    0 1px 3px rgba(22,24,28,.04), 0 8px 24px -8px rgba(22,24,28,.08);
+  --shadow-lg: 0 4px 6px rgba(22,24,28,.04), 0 20px 50px -10px rgba(22,24,28,.12);
+  --shadow-cta: 0 6px 16px -6px rgba(200,35,47,.5);
+  --shadow-cta-hover: 0 10px 24px -8px rgba(200,35,47,.6);
+
+  /* ─── Motion ─────────────────────────────────────────────── */
+  --ease: cubic-bezier(.2,.6,.2,1);
+  --t-fast: .2s ease;
+  --t-card: .25s ease;
+}
+
+/* ─── Base ─────────────────────────────────────────────────── */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--font-ui);
+  color: var(--fg1);
+  background: var(--bg1);
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+img { max-width: 100%; display: block; }
+a   { color: inherit; text-decoration: none; }
+
+/* ─── Semantic type ────────────────────────────────────────── */
+h1, .h1 {
+  font-family: var(--font-display);
+  font-size: var(--fs-h1);
+  line-height: .92;
+  letter-spacing: .005em;
+  font-weight: 400;
+}
+h2, .h2 {
+  font-family: var(--font-display);
+  font-size: var(--fs-h2);
+  line-height: .98;
+  letter-spacing: .005em;
+  font-weight: 400;
+}
+h3, .h3 {
+  font-family: var(--font-display);
+  font-size: var(--fs-h3);
+  line-height: 1.05;
+  letter-spacing: .005em;
+  font-weight: 400;
+}
+h4, .h4 {
+  font-family: var(--font-display);
+  font-size: var(--fs-h4);
+  letter-spacing: .03em;
+  font-weight: 400;
+}
+.lede {
+  font-size: var(--fs-lede);
+  line-height: 1.55;
+  color: var(--fg1);
+}
+p, .body { font-size: var(--fs-body); line-height: 1.55; }
+small, .small { font-size: var(--fs-small); color: var(--fg3); }
+
+.serif-i {
+  font-family: var(--font-serif-i);
+  font-style: italic;
+  font-weight: 400;
+}
+.em-i { /* mid-headline italic phrase */
+  font-family: var(--font-serif-i);
+  font-style: italic;
+  font-weight: 400;
+}
+.red { color: var(--red); }
+
+.micro {
+  font-family: var(--font-ui);
+  text-transform: uppercase;
+  letter-spacing: .18em;
+  font-weight: 700;
+  font-size: var(--fs-micro);
+}
+.micro-line {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+}
+.micro-line::before {
+  content: "";
+  width: 24px;
+  height: 2px;
+  background: var(--red);
+}
+.micro-red { color: var(--red); }
+
+/* ─── Buttons ──────────────────────────────────────────────── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 14px 24px;
+  border-radius: var(--r-sm);
+  font-family: var(--font-ui);
+  font-weight: 600;
+  font-size: 14px;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  border: none;
+  cursor: pointer;
+  transition: all var(--t-fast);
+}
+.btn-primary {
+  background: var(--red);
+  color: var(--cream);
+  box-shadow: var(--shadow-cta);
+}
+.btn-primary:hover {
+  background: var(--red-dark);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-cta-hover);
+}
+.btn-ghost {
+  background: transparent;
+  color: var(--ink);
+  border: 1.5px solid var(--ink);
+}
+.btn-ghost:hover {
+  background: var(--ink);
+  color: var(--cream);
+}
+.btn svg { width: 14px; height: 14px; }
+
+/* ─── Cards ────────────────────────────────────────────────── */
+.card {
+  background: var(--paper);
+  border-radius: var(--r-md);
+  box-shadow: var(--shadow);
+  padding: 28px;
+}
+.card-accent {
+  border-top: var(--border-accent-top);
+}
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+  transition: transform var(--t-card), box-shadow var(--t-card);
+}
+
+/* ─── Pills ────────────────────────────────────────────────── */
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  border-radius: var(--r-pill);
+  background: var(--paper);
+  border: var(--border);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--fg1);
+  box-shadow: var(--shadow);
+}
+.pill svg { width: 16px; height: 16px; color: var(--red); flex: none; }
+
+/* ─── Icon tile ────────────────────────────────────────────── */
+.icon-tile {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--r-lg);
+  background: var(--red-soft);
+  color: var(--red);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+}
+.icon-tile svg { width: 22px; height: 22px; }
+
+/* ─── Layout helpers ───────────────────────────────────────── */
+.wrap {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+section.sect { padding: var(--sp-9) 0; }
+@media (max-width: 720px) { section.sect { padding: var(--sp-8) 0; } }
+
+</style>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:var(--cream);color:var(--ink);font-family:var(--font-ui);font-size:15px;line-height:1.55;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1180px;margin:0 auto;padding:0 32px}
+@media(max-width:560px){.wrap{padding:0 20px}}
+img{max-width:100%;display:block}
+button,input,select,textarea{font:inherit;color:inherit}
+
+/* NAV */
+nav.top{position:sticky;top:0;z-index:50;background:rgba(247,244,238,.92);border-bottom:1px solid var(--line);backdrop-filter:saturate(180%) blur(14px);-webkit-backdrop-filter:saturate(180%) blur(14px)}
+nav.top .wrap{display:flex;align-items:center;justify-content:space-between;height:78px;max-width:1280px}
+.brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--ink)}
+.brand img{width:40px;height:40px;object-fit:contain}
+.brand-name{font-family:var(--font-display);font-size:24px;font-weight:400;letter-spacing:.02em;line-height:1}
+.brand-tag{font-size:11px;color:var(--dim);letter-spacing:.06em;text-transform:uppercase;margin-top:4px}
+.nav-right{display:flex;align-items:center;gap:18px}
+.phone-link{display:inline-flex;align-items:center;gap:8px;text-decoration:none;color:var(--ink);font-weight:600;font-size:15px}
+.phone-link svg{width:16px;height:16px;color:var(--red)}
+.back-link{display:inline-flex;align-items:center;gap:6px;color:var(--dim);text-decoration:none;font-size:13.5px;font-weight:500}
+.back-link:hover{color:var(--ink)}
+.back-link svg{width:14px;height:14px}
+@media(max-width:660px){nav.top .wrap{height:64px}.brand img{width:34px;height:34px}.brand-name{font-size:20px}.brand-tag,.back-link{display:none}}
+
+/* HEADER */
+.page-head{padding:60px 0 36px;text-align:center}
+.page-head .micro{display:inline-flex;align-items:center;gap:10px;color:var(--red);font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;margin-bottom:20px}
+.page-head .micro::before{content:"";width:24px;height:2px;background:var(--red)}
+.page-head h1{font-family:var(--font-display);font-size:clamp(56px,8vw,104px);line-height:.92;font-weight:400;margin-bottom:16px;letter-spacing:.005em}
+.page-head h1 .em-i{font-family:var(--font-serif-i);font-style:italic;font-weight:400;color:var(--red);text-transform:none;letter-spacing:-.01em}
+.page-head .lede{font-family:var(--font-serif-i);font-style:italic;font-size:clamp(18px,2.2vw,24px);line-height:1.45;color:rgba(22,24,28,.72);max-width:640px;margin:0 auto;text-wrap:pretty}
+@media(max-width:560px){.page-head{padding:40px 0 24px}}
+
+/* PROGRESS RAIL */
+.progress{padding:8px 0 40px;border-bottom:1px solid var(--line)}
+.progress-track{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;max-width:760px;margin:0 auto}
+.progress-step{display:flex;flex-direction:column;align-items:center;gap:8px;cursor:default;position:relative}
+.progress-step .dot{width:34px;height:34px;border-radius:50%;background:#fff;border:2px solid var(--line-strong);display:grid;place-items:center;color:var(--dim);font-weight:700;font-size:13.5px;transition:all .35s cubic-bezier(.22,1,.36,1)}
+.progress-step .label{font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);font-weight:600;text-align:center;line-height:1.25}
+.progress-step.active .dot{background:var(--ink);border-color:var(--ink);color:var(--cream)}
+.progress-step.active .label{color:var(--ink)}
+.progress-step.done .dot{background:var(--red);border-color:var(--red);color:var(--cream)}
+.progress-step.done .label{color:var(--ink)}
+.progress-step:not(:last-child)::after{content:"";position:absolute;top:17px;left:calc(50% + 22px);right:calc(-50% + 22px);height:2px;background:var(--line-strong);z-index:-1}
+.progress-step.done:not(:last-child)::after{background:var(--red)}
+@media(max-width:560px){.progress-step .label{font-size:9.5px;letter-spacing:.06em}.progress-step .dot{width:28px;height:28px;font-size:12px}.progress-step:not(:last-child)::after{top:14px}}
+
+/* MAIN */
+main{padding:48px 0 100px}
+.steps{position:relative;min-height:560px}
+.step{display:none;animation:fadeUp .5s cubic-bezier(.22,1,.36,1)}
+.step.active{display:block}
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+
+.step-head{margin-bottom:32px;text-align:center;max-width:600px;margin-left:auto;margin-right:auto}
+.step-head h2{font-family:var(--font-serif-i);font-style:italic;font-weight:400;font-size:clamp(32px,4.5vw,46px);line-height:1.05;margin-bottom:10px;letter-spacing:-.01em}
+.step-head h2 .red{color:var(--red)}
+.step-head p{font-size:15.5px;color:var(--dim);text-wrap:pretty}
+
+/* form layout */
+.form-card{max-width:680px;margin:0 auto;background:#fff;border:1px solid var(--line);border-radius:14px;padding:36px 40px;box-shadow:0 4px 24px -8px rgba(22,24,28,.06)}
+@media(max-width:560px){.form-card{padding:24px 22px;border-radius:10px}}
+
+.field{display:flex;flex-direction:column;gap:8px;margin-bottom:22px}
+.field label{font-size:12px;letter-spacing:.12em;text-transform:uppercase;font-weight:700;color:var(--ink)}
+.field label .req{color:var(--red);margin-left:4px}
+.field .hint{font-size:13px;color:var(--dim);margin-top:-4px;margin-bottom:6px;font-style:italic;font-family:var(--font-serif-i);letter-spacing:.005em}
+.field input[type=text],.field input[type=tel],.field input[type=email],.field textarea,.field select{width:100%;background:var(--cream);border:1.5px solid var(--line);border-radius:8px;padding:14px 16px;font-size:15.5px;font-family:var(--font-ui);color:var(--ink);transition:border-color .2s,background .2s,box-shadow .2s}
+.field input:focus,.field textarea:focus,.field select:focus{outline:none;border-color:var(--ink);background:#fff;box-shadow:0 0 0 4px rgba(22,24,28,.06)}
+.field textarea{resize:vertical;min-height:96px;line-height:1.55}
+.field-row{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+@media(max-width:560px){.field-row{grid-template-columns:1fr}}
+
+/* radio chip groups */
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{position:relative}
+.chip input{position:absolute;opacity:0;pointer-events:none}
+.chip label{display:inline-flex;align-items:center;gap:8px;padding:11px 18px;border:1.5px solid var(--line-strong);border-radius:999px;font-size:14px;font-weight:500;letter-spacing:0;text-transform:none;cursor:pointer;transition:all .2s;background:#fff;color:var(--ink)}
+.chip label:hover{border-color:var(--ink)}
+.chip input:checked + label{background:var(--ink);color:var(--cream);border-color:var(--ink)}
+
+/* big tile selector (project type) */
+.tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+@media(max-width:560px){.tiles{grid-template-columns:repeat(2,1fr)}}
+.tile{position:relative}
+.tile input{position:absolute;opacity:0;pointer-events:none}
+.tile label{display:flex;flex-direction:column;align-items:flex-start;gap:6px;padding:18px 18px 16px;background:#fff;border:1.5px solid var(--line-strong);border-radius:10px;cursor:pointer;transition:all .25s cubic-bezier(.22,1,.36,1);height:100%;min-height:96px}
+.tile label:hover{border-color:var(--ink);transform:translateY(-1px)}
+.tile input:checked + label{border-color:var(--red);background:#FFF8F8;box-shadow:0 4px 14px -6px rgba(200,35,47,.25)}
+.tile .tile-num{font-family:var(--font-display);font-size:14px;color:var(--red);letter-spacing:.08em}
+.tile .tile-name{font-family:var(--font-serif-i);font-style:italic;font-weight:400;font-size:20px;line-height:1.1;color:var(--ink)}
+.tile .tile-sub{font-size:12px;color:var(--dim)}
+
+/* CALENDAR step */
+.cal-shell{display:grid;grid-template-columns:1.1fr 1fr;gap:24px;max-width:920px;margin:0 auto}
+@media(max-width:780px){.cal-shell{grid-template-columns:1fr}}
+.cal,.slot-list{background:#fff;border:1px solid var(--line);border-radius:14px;padding:24px;box-shadow:0 4px 24px -8px rgba(22,24,28,.06)}
+.cal-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}
+.cal-head .month{font-family:var(--font-serif-i);font-style:italic;font-weight:400;font-size:24px}
+.cal-nav{display:flex;gap:6px}
+.cal-nav button{width:34px;height:34px;border:1.5px solid var(--line-strong);background:#fff;border-radius:50%;display:grid;place-items:center;cursor:pointer;color:var(--ink);transition:all .2s}
+.cal-nav button:hover:not(:disabled){border-color:var(--ink);background:var(--ink);color:var(--cream)}
+.cal-nav button:disabled{opacity:.35;cursor:not-allowed}
+.cal-nav svg{width:14px;height:14px}
+.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px}
+.cal-dow{font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;font-weight:700;color:var(--dim);text-align:center;padding:8px 0}
+.cal-day{aspect-ratio:1;border:none;background:transparent;border-radius:8px;display:grid;place-items:center;font-size:14px;font-weight:500;cursor:pointer;color:var(--ink);transition:all .15s;position:relative}
+.cal-day:hover:not(:disabled):not(.empty){background:var(--cream-dark)}
+.cal-day:disabled,.cal-day.empty{color:rgba(22,24,28,.18);cursor:default}
+.cal-day.has-slots::after{content:"";position:absolute;bottom:5px;left:50%;transform:translateX(-50%);width:4px;height:4px;border-radius:50%;background:var(--red)}
+.cal-day.selected{background:var(--ink);color:var(--cream)}
+.cal-day.selected.has-slots::after{background:var(--cream)}
+.cal-day.today{font-weight:700}
+.cal-day.today::before{content:"";position:absolute;inset:4px;border:1.5px dashed var(--red);border-radius:7px}
+.cal-day.selected.today::before{border-color:var(--cream)}
+
+.slot-list h4{font-family:var(--font-serif-i);font-style:italic;font-weight:400;font-size:20px;line-height:1.1;margin-bottom:4px}
+.slot-list .slot-date-sub{font-size:13px;color:var(--dim);margin-bottom:18px}
+.slot-list .slot-empty{padding:40px 8px;text-align:center;color:var(--dim);font-size:14px;font-style:italic;font-family:var(--font-serif-i);line-height:1.45}
+.duration-toggle{display:flex;gap:6px;margin-bottom:16px;background:var(--cream-dark);padding:4px;border-radius:999px}
+.duration-toggle button{flex:1;padding:10px 12px;border:none;background:transparent;border-radius:999px;font-size:13px;font-weight:600;color:var(--dim);cursor:pointer;transition:all .2s}
+.duration-toggle button.active{background:#fff;color:var(--ink);box-shadow:0 2px 8px -2px rgba(22,24,28,.12)}
+.slots{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.slots button{padding:12px 10px;border:1.5px solid var(--line-strong);background:#fff;border-radius:8px;font-size:14px;font-weight:600;color:var(--ink);cursor:pointer;transition:all .2s;text-align:center}
+.slots button:hover{border-color:var(--ink)}
+.slots button.selected{background:var(--ink);color:var(--cream);border-color:var(--ink)}
+
+/* REVIEW step */
+.review{max-width:680px;margin:0 auto}
+.review-card{background:#fff;border:1px solid var(--line);border-radius:14px;overflow:hidden;box-shadow:0 4px 24px -8px rgba(22,24,28,.06)}
+.review-section{padding:24px 28px;border-bottom:1px solid var(--line)}
+.review-section:last-child{border-bottom:none}
+.review-section h5{font-size:11px;letter-spacing:.16em;text-transform:uppercase;font-weight:700;color:var(--dim);margin-bottom:10px;display:flex;align-items:center;justify-content:space-between}
+.review-section h5 a{color:var(--red);text-decoration:none;font-weight:600;letter-spacing:.06em;font-size:11px;border-bottom:1px solid currentColor}
+.review-row{display:flex;justify-content:space-between;align-items:flex-start;padding:6px 0;font-size:15px;gap:16px}
+.review-row .k{color:var(--dim);min-width:120px}
+.review-row .v{color:var(--ink);font-weight:500;text-align:right;flex:1}
+.review-when{padding:30px 28px;background:var(--ink);color:var(--cream);text-align:center}
+.review-when .when-eyebrow{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:rgba(247,244,238,.6);margin-bottom:8px;font-weight:700}
+.review-when .when-day{font-family:var(--font-serif-i);font-style:italic;font-weight:400;font-size:32px;line-height:1.05;margin-bottom:4px}
+.review-when .when-time{font-size:16px;color:rgba(247,244,238,.85)}
+
+.consent{margin-top:18px;padding:14px 16px;background:var(--cream-dark);border-radius:8px;font-size:12.5px;color:var(--dim);line-height:1.45;display:flex;gap:10px;align-items:flex-start}
+.consent svg{flex-shrink:0;color:var(--red);width:14px;height:14px;margin-top:2px}
+
+/* CONFIRM step */
+.confirm{max-width:580px;margin:0 auto;text-align:center;padding-top:30px}
+.check-wrap{display:inline-grid;place-items:center;width:96px;height:96px;border-radius:50%;background:var(--ink);color:var(--cream);margin-bottom:30px;box-shadow:0 24px 60px -20px rgba(22,24,28,.35);position:relative;animation:popIn .6s cubic-bezier(.22,1,.36,1) both}
+.check-wrap svg{width:46px;height:46px;animation:drawCheck .7s cubic-bezier(.22,1,.36,1) .2s both}
+.check-wrap::after{content:"";position:absolute;inset:-6px;border-radius:50%;border:2px solid var(--red);opacity:0;animation:ring 2.4s ease-out .4s infinite}
+@keyframes popIn{from{transform:scale(.4);opacity:0}to{transform:scale(1);opacity:1}}
+@keyframes drawCheck{from{stroke-dashoffset:30}to{stroke-dashoffset:0}}
+@keyframes ring{0%{transform:scale(1);opacity:.6}100%{transform:scale(1.5);opacity:0}}
+.confirm h2{font-family:var(--font-display);font-size:clamp(48px,7vw,80px);line-height:.95;font-weight:400;margin-bottom:16px;letter-spacing:.01em}
+.confirm h2 .em-i{font-family:var(--font-serif-i);font-style:italic;font-weight:400;color:var(--red);text-transform:none;letter-spacing:-.01em}
+.confirm .lede{font-family:var(--font-serif-i);font-style:italic;font-size:20px;line-height:1.45;color:rgba(22,24,28,.7);max-width:480px;margin:0 auto 14px;text-wrap:pretty}
+.confirm .micro-lede{font-size:14.5px;color:var(--dim);margin-bottom:30px}
+.confirm-when{display:inline-flex;flex-direction:column;align-items:center;gap:6px;padding:22px 36px;background:var(--ink);color:var(--cream);border-radius:14px;margin-bottom:30px;text-align:center}
+.confirm-when .label{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:rgba(247,244,238,.6);font-weight:700}
+.confirm-when .day{font-family:var(--font-serif-i);font-style:italic;font-size:26px;line-height:1.05;font-weight:400}
+.confirm-when .time{font-size:15px;color:rgba(247,244,238,.85)}
+.confirm-actions{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-bottom:36px}
+
+/* BUTTONS */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:15px 28px;border-radius:999px;font-family:var(--font-ui);font-weight:600;font-size:14.5px;text-decoration:none;transition:all .25s cubic-bezier(.22,1,.36,1);border:1.5px solid transparent;cursor:pointer;letter-spacing:.01em;background:transparent;color:inherit}
+.btn:disabled{opacity:.4;cursor:not-allowed}
+.btn svg{width:17px;height:17px}
+.btn-primary{background:var(--red);color:var(--cream);border-color:var(--red)}
+.btn-primary:hover:not(:disabled){background:var(--red-dark);border-color:var(--red-dark);transform:translateY(-1px);box-shadow:0 12px 24px -8px rgba(200,35,47,.45)}
+.btn-ghost{background:transparent;color:var(--ink);border-color:var(--ink)}
+.btn-ghost:hover:not(:disabled){background:var(--ink);color:var(--cream)}
+.btn-link{color:var(--dim);text-decoration:none;font-size:13.5px;font-weight:500;padding:10px 16px;background:transparent}
+.btn-link:hover{color:var(--ink)}
+.btn-link svg{width:14px;height:14px}
+
+.step-actions{display:flex;align-items:center;justify-content:space-between;gap:12px;max-width:680px;margin:32px auto 0}
+.step-actions.center{justify-content:center}
+.step-actions .right{display:flex;gap:10px;align-items:center}
+
+/* SIDEBAR ASSURANCES */
+.assurances{max-width:680px;margin:24px auto 0;display:flex;flex-wrap:wrap;justify-content:center;gap:20px;padding:18px 22px;background:rgba(22,24,28,.03);border-radius:10px;font-size:12.5px;color:var(--dim)}
+.assurances span{display:inline-flex;align-items:center;gap:6px}
+.assurances svg{width:13px;height:13px;color:var(--red)}
+
+/* FOOTER MICRO */
+footer{background:var(--cream-dark);padding:32px 0;border-top:1px solid var(--line);font-size:13.5px;color:var(--dim);text-align:center}
+footer a{color:var(--ink);text-decoration:none;font-weight:500}
+footer a:hover{color:var(--red)}
+</style>
+</head>
+<body>
+
+<nav class="top">
+  <div class="wrap">
+    <a href="index.html" class="brand">
+      <img src="../brand/logo-primary-dark.png" alt="ECS Fence"/>
+      <div>
+        <div class="brand-name">ECS Fence</div>
+        <div class="brand-tag">Crafted &amp; built to last</div>
+      </div>
+    </a>
+    <div class="nav-right">
+      <a href="index.html" class="back-link">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+        Back to home
+      </a>
+      <a href="tel:7575974513" class="phone-link">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        (757) 597-4513
+      </a>
+    </div>
+  </div>
+</nav>
+
+<section class="page-head">
+  <div class="wrap">
+    <div class="micro">Free · No deposit · No pressure</div>
+    <h1>Book your <span class="em-i">free walkthrough.</span></h1>
+    <p class="lede">Pick a 30-minute slot. We'll meet you on-site, walk the line together, and have a written quote in your inbox within 24 hours.</p>
+  </div>
+</section>
+
+<section class="progress">
+  <div class="wrap">
+    <div class="progress-track">
+      <div class="progress-step active" data-step="1"><div class="dot">1</div><div class="label">Project</div></div>
+      <div class="progress-step" data-step="2"><div class="dot">2</div><div class="label">When</div></div>
+      <div class="progress-step" data-step="3"><div class="dot">3</div><div class="label">Where</div></div>
+      <div class="progress-step" data-step="4"><div class="dot">4</div><div class="label">Confirm</div></div>
+    </div>
+  </div>
+</section>
+
+<main>
+  <div class="wrap">
+    <div class="steps">
+
+      <!-- STEP 1: PROJECT -->
+      <div class="step active" data-step="1">
+        <div class="step-head">
+          <h2>Tell us a bit about <span class="red">the project.</span></h2>
+          <p>Roughly is fine. We'll dial it in on-site.</p>
+        </div>
+
+        <div class="form-card">
+          <div class="field">
+            <label>What kind of fence?<span class="req">*</span></label>
+            <div class="tiles">
+              <div class="tile"><input type="radio" name="ftype" id="t-wood" value="Wood"><label for="t-wood"><span class="tile-num">01</span><span class="tile-name">Wood</span><span class="tile-sub">Cedar &amp; pine privacy</span></label></div>
+              <div class="tile"><input type="radio" name="ftype" id="t-chain" value="Chain Link"><label for="t-chain"><span class="tile-num">02</span><span class="tile-name">Chain link</span><span class="tile-sub">Black, galv, vinyl-coated</span></label></div>
+              <div class="tile"><input type="radio" name="ftype" id="t-iron" value="Iron / Aluminum"><label for="t-iron"><span class="tile-num">03</span><span class="tile-name">Iron / alum.</span><span class="tile-sub">Pool code, decorative</span></label></div>
+              <div class="tile"><input type="radio" name="ftype" id="t-gates" value="Gates"><label for="t-gates"><span class="tile-num">04</span><span class="tile-name">Gates</span><span class="tile-sub">Walk, drive, automated</span></label></div>
+              <div class="tile"><input type="radio" name="ftype" id="t-comm" value="Commercial"><label for="t-comm"><span class="tile-num">05</span><span class="tile-name">Commercial</span><span class="tile-sub">Backstop, perimeter</span></label></div>
+              <div class="tile"><input type="radio" name="ftype" id="t-rep" value="Repairs"><label for="t-rep"><span class="tile-num">06</span><span class="tile-name">Repairs</span><span class="tile-sub">Posts, panels, hardware</span></label></div>
+            </div>
+          </div>
+
+          <div class="field">
+            <label>Approximate linear feet?</label>
+            <p class="hint">Eyeball it — we'll measure when we get there.</p>
+            <div class="chips">
+              <div class="chip"><input type="radio" name="lf" id="lf-q" value="Don't know"><label for="lf-q">Don't know</label></div>
+              <div class="chip"><input type="radio" name="lf" id="lf-100" value="Under 100"><label for="lf-100">Under 100 ft</label></div>
+              <div class="chip"><input type="radio" name="lf" id="lf-250" value="100–250"><label for="lf-250">100–250 ft</label></div>
+              <div class="chip"><input type="radio" name="lf" id="lf-500" value="250–500"><label for="lf-500">250–500 ft</label></div>
+              <div class="chip"><input type="radio" name="lf" id="lf-500p" value="500+"><label for="lf-500p">500+ ft</label></div>
+            </div>
+          </div>
+
+          <div class="field">
+            <label>Timeline?</label>
+            <div class="chips">
+              <div class="chip"><input type="radio" name="tl" id="tl-asap" value="ASAP"><label for="tl-asap">ASAP</label></div>
+              <div class="chip"><input type="radio" name="tl" id="tl-1" value="1–3 months"><label for="tl-1">1–3 mo</label></div>
+              <div class="chip"><input type="radio" name="tl" id="tl-3" value="3–6 months"><label for="tl-3">3–6 mo</label></div>
+              <div class="chip"><input type="radio" name="tl" id="tl-r" value="Just researching"><label for="tl-r">Just researching</label></div>
+            </div>
+          </div>
+
+          <div class="field" style="margin-bottom:0">
+            <label for="notes">Anything else? <span style="text-transform:none;letter-spacing:0;color:var(--dim);font-weight:400;font-size:11px">(optional)</span></label>
+            <textarea id="notes" name="notes" placeholder="Dog jumped the gate twice. HOA wants no chain link visible from the street. Pool inspector calls Tuesday — anything you want us to know."></textarea>
+          </div>
+        </div>
+
+        <div class="step-actions center">
+          <button class="btn btn-primary" id="next1" disabled>
+            Pick a date
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- STEP 2: WHEN -->
+      <div class="step" data-step="2">
+        <div class="step-head">
+          <h2>Pick a <span class="red">walkthrough slot.</span></h2>
+          <p>Times shown are when Edgar's available this week. 30 or 60 minutes — your call.</p>
+        </div>
+
+        <div class="cal-shell">
+          <div class="cal">
+            <div class="cal-head">
+              <div class="month" id="calMonth">May 2026</div>
+              <div class="cal-nav">
+                <button id="prevMonth" aria-label="Previous month" disabled><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></button>
+                <button id="nextMonth" aria-label="Next month"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></button>
+              </div>
+            </div>
+            <div class="cal-grid" id="calGrid"></div>
+          </div>
+
+          <div class="slot-list">
+            <h4 id="slotDay">Pick a date</h4>
+            <p class="slot-date-sub" id="slotSub">Available slots will appear here.</p>
+
+            <div class="duration-toggle">
+              <button class="active" data-dur="30">30 min</button>
+              <button data-dur="60">60 min</button>
+            </div>
+
+            <div id="slotsContainer">
+              <div class="slot-empty">Tap a date with a red dot to see Edgar's open slots.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="step-actions">
+          <button class="btn btn-link" data-back="1">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+            Back
+          </button>
+          <button class="btn btn-primary" id="next2" disabled>
+            Continue
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- STEP 3: WHERE / CONTACT -->
+      <div class="step" data-step="3">
+        <div class="step-head">
+          <h2>Where should we <span class="red">meet you?</span></h2>
+          <p>Just the basics. We'll text or call to confirm before we head out.</p>
+        </div>
+
+        <div class="form-card">
+          <div class="field-row">
+            <div class="field">
+              <label for="firstName">First name<span class="req">*</span></label>
+              <input type="text" id="firstName" autocomplete="given-name"/>
+            </div>
+            <div class="field">
+              <label for="lastName">Last name<span class="req">*</span></label>
+              <input type="text" id="lastName" autocomplete="family-name"/>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="phone">Mobile phone<span class="req">*</span></label>
+            <p class="hint">We'll text confirmation + a 24-hour reminder. No spam, ever.</p>
+            <input type="tel" id="phone" autocomplete="tel" placeholder="(402) 555-0123"/>
+          </div>
+
+          <div class="field">
+            <label for="address">Address where the fence is going<span class="req">*</span></label>
+            <p class="hint">Street + city. We use this to plan the route.</p>
+            <input type="text" id="address" autocomplete="street-address" placeholder="1234 Main St, Papillion NE 68046"/>
+          </div>
+
+          <div class="field" style="margin-bottom:0">
+            <label>How'd you hear about us? <span style="text-transform:none;letter-spacing:0;color:var(--dim);font-weight:400;font-size:11px">(optional, but helps us a ton)</span></label>
+            <div class="chips">
+              <div class="chip"><input type="radio" name="src" id="s-google" value="Google"><label for="s-google">Google</label></div>
+              <div class="chip"><input type="radio" name="src" id="s-fb" value="Facebook"><label for="s-fb">Facebook</label></div>
+              <div class="chip"><input type="radio" name="src" id="s-ref" value="Referral"><label for="s-ref">Referral</label></div>
+              <div class="chip"><input type="radio" name="src" id="s-drove" value="Drove by"><label for="s-drove">Drove by</label></div>
+              <div class="chip"><input type="radio" name="src" id="s-other" value="Other"><label for="s-other">Other</label></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="step-actions">
+          <button class="btn btn-link" data-back="2">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+            Back
+          </button>
+          <button class="btn btn-primary" id="next3" disabled>
+            Review
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- STEP 4: REVIEW -->
+      <div class="step" data-step="4">
+        <div class="step-head">
+          <h2>Look <span class="red">right?</span></h2>
+          <p>Last check before we put you on Edgar's calendar.</p>
+        </div>
+
+        <div class="review">
+          <div class="review-card">
+            <div class="review-when">
+              <div class="when-eyebrow">Walkthrough</div>
+              <div class="when-day" id="rWhenDay">—</div>
+              <div class="when-time" id="rWhenTime">—</div>
+            </div>
+
+            <div class="review-section">
+              <h5>Project <a href="#" data-back="1">Edit</a></h5>
+              <div class="review-row"><span class="k">Type</span><span class="v" id="rType">—</span></div>
+              <div class="review-row"><span class="k">Linear feet</span><span class="v" id="rLF">—</span></div>
+              <div class="review-row"><span class="k">Timeline</span><span class="v" id="rTL">—</span></div>
+              <div class="review-row" id="rNotesRow" style="display:none"><span class="k">Notes</span><span class="v" id="rNotes">—</span></div>
+            </div>
+
+            <div class="review-section">
+              <h5>You <a href="#" data-back="3">Edit</a></h5>
+              <div class="review-row"><span class="k">Name</span><span class="v" id="rName">—</span></div>
+              <div class="review-row"><span class="k">Phone</span><span class="v" id="rPhone">—</span></div>
+              <div class="review-row"><span class="k">Address</span><span class="v" id="rAddr">—</span></div>
+              <div class="review-row" id="rSrcRow" style="display:none"><span class="k">Heard via</span><span class="v" id="rSrc">—</span></div>
+            </div>
+          </div>
+
+          <div class="consent">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            <span>By booking, you agree we can text and call you about this walkthrough. We won't share your info, and we won't spam. Reply STOP anytime to opt out of texts.</span>
+          </div>
+        </div>
+
+        <div class="step-actions">
+          <button class="btn btn-link" data-back="3">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+            Back
+          </button>
+          <button class="btn btn-primary" id="submitBtn">
+            Lock it in
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- STEP 5: CONFIRM -->
+      <div class="step" data-step="5">
+        <div class="confirm">
+          <div class="check-wrap" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="stroke-dasharray:30">
+              <polyline points="20 6 9 17 4 12"/>
+            </svg>
+          </div>
+          <h2>You're <span class="em-i">on the books.</span></h2>
+
+          <div class="confirm-when">
+            <span class="label">Walkthrough</span>
+            <span class="day" id="cWhenDay">—</span>
+            <span class="time" id="cWhenTime">—</span>
+          </div>
+
+          <p class="lede">A confirmation text just went out to your phone. We'll send a reminder 24 hours before too.</p>
+          <p class="micro-lede">Need to reschedule? Just text Edgar at <a href="tel:7575974513" style="color:var(--ink);font-weight:600">(757) 597-4513</a>.</p>
+
+          <div class="confirm-actions">
+            <a href="thank-you.html" class="btn btn-primary">
+              How to prep for the walkthrough
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </a>
+            <a href="index.html" class="btn btn-ghost">Back to home</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="assurances" id="assurances">
+      <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Costs $0</span>
+      <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>30-minute walkthrough</span>
+      <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Quote within 24 hrs</span>
+      <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>No deposit, no pressure</span>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    ECS Fence · Omaha · Papillion · Bellevue · <a href="tel:7575974513">(757) 597-4513</a> · <a href="mailto:ecsfence@outlook.com">ecsfence@outlook.com</a>
+  </div>
+</footer>
+
+<script>
+/* ─────────────────────────────────────────────────────────────
+   STATE
+───────────────────────────────────────────────────────────── */
+const state = {
+  step: 1,
+  ftype: null, lf: null, tl: null, notes: '',
+  date: null, slot: null, duration: 30,
+  firstName: '', lastName: '', phone: '', address: '', src: null,
+};
+
+/* ─────────────────────────────────────────────────────────────
+   AVAILABILITY MODEL  (mirrors what'll come from Supabase)
+   Edgar's recurring weekly windows. Specific holidays/blackouts
+   would be loaded as a "blocked" set from the DB.
+───────────────────────────────────────────────────────────── */
+const WEEKLY = {
+  // 0=Sun ... 6=Sat
+  1: [['09:00','11:00'],['13:00','16:00']],   // Mon
+  2: [['09:00','11:00'],['13:00','16:00']],   // Tue
+  3: [['09:00','11:00'],['13:00','16:00']],   // Wed
+  4: [['09:00','11:00'],['13:00','16:00']],   // Thu
+  5: [['09:00','11:00'],['13:00','15:00']],   // Fri
+  6: [['09:00','11:00']],                     // Sat
+};
+const BLOCKED_DATES = new Set([]);  // ISO yyyy-mm-dd
+const BOOKED_SLOTS = new Set([]);   // ISO yyyy-mm-ddTHH:mm  (already taken)
+
+const SLOT_STEP = 30;  // grid resolution
+const LEAD_TIME_DAYS = 1;  // next-business-day minimum
+
+function pad(n){return String(n).padStart(2,'0')}
+function isoDate(d){return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`}
+function addMin(time, mins){
+  const [h,m] = time.split(':').map(Number);
+  const total = h*60 + m + mins;
+  return `${pad(Math.floor(total/60))}:${pad(total%60)}`;
+}
+function nextBusinessDay(date){
+  const d = new Date(date);
+  d.setDate(d.getDate() + LEAD_TIME_DAYS);
+  while(d.getDay()===0) d.setDate(d.getDate()+1);
+  return d;
+}
+function getSlotsForDate(date, duration){
+  const dow = date.getDay();
+  const windows = WEEKLY[dow] || [];
+  const dateISO = isoDate(date);
+  if(BLOCKED_DATES.has(dateISO)) return [];
+  const slots = [];
+  windows.forEach(([start, end])=>{
+    let cursor = start;
+    while(true){
+      const next = addMin(cursor, duration);
+      if(next > end) break;
+      const key = `${dateISO}T${cursor}`;
+      if(!BOOKED_SLOTS.has(key)) slots.push(cursor);
+      cursor = addMin(cursor, SLOT_STEP);
+    }
+  });
+  return slots;
+}
+function dateHasAvailability(date){
+  const min = nextBusinessDay(new Date());
+  if(date < new Date(min.getFullYear(),min.getMonth(),min.getDate())) return false;
+  return getSlotsForDate(date, 30).length > 0;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   STEP NAVIGATION
+───────────────────────────────────────────────────────────── */
+const stepEls = document.querySelectorAll('.step');
+const progSteps = document.querySelectorAll('.progress-step');
+const assurancesEl = document.getElementById('assurances');
+
+function gotoStep(n){
+  state.step = n;
+  stepEls.forEach(el=>el.classList.toggle('active', Number(el.dataset.step)===n));
+  progSteps.forEach(el=>{
+    const s = Number(el.dataset.step);
+    el.classList.toggle('active', s===n);
+    el.classList.toggle('done', s<n);
+  });
+  assurancesEl.style.display = (n===5) ? 'none' : '';
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+document.querySelectorAll('[data-back]').forEach(b=>{
+  b.addEventListener('click', e=>{
+    e.preventDefault();
+    gotoStep(Number(b.dataset.back));
+  });
+});
+
+/* ─────────────────────────────────────────────────────────────
+   STEP 1
+───────────────────────────────────────────────────────────── */
+const next1 = document.getElementById('next1');
+function evalStep1(){ next1.disabled = !state.ftype; }
+document.querySelectorAll('input[name=ftype]').forEach(i=>i.addEventListener('change', e=>{state.ftype=e.target.value; evalStep1()}));
+document.querySelectorAll('input[name=lf]').forEach(i=>i.addEventListener('change', e=>{state.lf=e.target.value}));
+document.querySelectorAll('input[name=tl]').forEach(i=>i.addEventListener('change', e=>{state.tl=e.target.value}));
+document.getElementById('notes').addEventListener('input', e=>{state.notes=e.target.value});
+next1.addEventListener('click', ()=>{ renderCalendar(); gotoStep(2); });
+
+/* ─────────────────────────────────────────────────────────────
+   STEP 2 — CALENDAR
+───────────────────────────────────────────────────────────── */
+const today = new Date(); today.setHours(0,0,0,0);
+let calCursor = new Date(today.getFullYear(), today.getMonth(), 1);
+
+const monthEl = document.getElementById('calMonth');
+const gridEl = document.getElementById('calGrid');
+const slotDayEl = document.getElementById('slotDay');
+const slotSubEl = document.getElementById('slotSub');
+const slotsContainerEl = document.getElementById('slotsContainer');
+const next2 = document.getElementById('next2');
+
+const MONTH_NAMES = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+const DOW = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+
+function renderCalendar(){
+  monthEl.textContent = `${MONTH_NAMES[calCursor.getMonth()]} ${calCursor.getFullYear()}`;
+  gridEl.innerHTML = '';
+  DOW.forEach(d=>{
+    const el = document.createElement('div');
+    el.className='cal-dow'; el.textContent=d; gridEl.appendChild(el);
+  });
+  const first = new Date(calCursor.getFullYear(), calCursor.getMonth(), 1);
+  const last = new Date(calCursor.getFullYear(), calCursor.getMonth()+1, 0);
+  for(let i=0;i<first.getDay();i++){
+    const e = document.createElement('div'); e.className='cal-day empty'; gridEl.appendChild(e);
+  }
+  for(let day=1;day<=last.getDate();day++){
+    const date = new Date(calCursor.getFullYear(), calCursor.getMonth(), day);
+    const btn = document.createElement('button');
+    btn.type='button'; btn.className='cal-day'; btn.textContent = day;
+    if(date.getTime()===today.getTime()) btn.classList.add('today');
+    if(dateHasAvailability(date)){
+      btn.classList.add('has-slots');
+      btn.addEventListener('click', ()=>selectDate(date, btn));
+    } else {
+      btn.disabled = true;
+    }
+    if(state.date && isoDate(state.date)===isoDate(date)) btn.classList.add('selected');
+    gridEl.appendChild(btn);
+  }
+  // disable prev if at this month
+  document.getElementById('prevMonth').disabled =
+    calCursor.getFullYear()===today.getFullYear() && calCursor.getMonth()===today.getMonth();
+}
+document.getElementById('prevMonth').addEventListener('click', ()=>{
+  calCursor.setMonth(calCursor.getMonth()-1); renderCalendar();
+});
+document.getElementById('nextMonth').addEventListener('click', ()=>{
+  calCursor.setMonth(calCursor.getMonth()+1); renderCalendar();
+});
+
+function selectDate(date, btnEl){
+  state.date = date; state.slot = null;
+  document.querySelectorAll('.cal-day.selected').forEach(b=>b.classList.remove('selected'));
+  if(btnEl) btnEl.classList.add('selected');
+  renderSlots();
+  evalStep2();
+}
+
+function renderSlots(){
+  if(!state.date){
+    slotDayEl.textContent='Pick a date';
+    slotSubEl.textContent='Available slots will appear here.';
+    slotsContainerEl.innerHTML='<div class="slot-empty">Tap a date with a red dot to see Edgar\'s open slots.</div>';
+    return;
+  }
+  const d = state.date;
+  slotDayEl.textContent = `${DOW[d.getDay()]}, ${MONTH_NAMES[d.getMonth()]} ${d.getDate()}`;
+  slotSubEl.textContent = `Choose a ${state.duration}-minute slot.`;
+  const slots = getSlotsForDate(d, state.duration);
+  if(!slots.length){
+    slotsContainerEl.innerHTML='<div class="slot-empty">No '+state.duration+'-min openings here. Try the other duration or another day.</div>';
+    return;
+  }
+  const grid = document.createElement('div'); grid.className='slots';
+  slots.forEach(t=>{
+    const b = document.createElement('button');
+    b.type='button'; b.textContent = formatTime(t);
+    if(state.slot===t) b.classList.add('selected');
+    b.addEventListener('click', ()=>{
+      state.slot = t;
+      grid.querySelectorAll('button').forEach(x=>x.classList.remove('selected'));
+      b.classList.add('selected');
+      evalStep2();
+    });
+    grid.appendChild(b);
+  });
+  slotsContainerEl.innerHTML = '';
+  slotsContainerEl.appendChild(grid);
+}
+
+function formatTime(t){
+  let [h,m] = t.split(':').map(Number);
+  const ampm = h>=12?'PM':'AM';
+  h = h%12 || 12;
+  return `${h}:${pad(m)} ${ampm}`;
+}
+
+document.querySelectorAll('.duration-toggle button').forEach(b=>{
+  b.addEventListener('click', ()=>{
+    document.querySelectorAll('.duration-toggle button').forEach(x=>x.classList.remove('active'));
+    b.classList.add('active');
+    state.duration = Number(b.dataset.dur);
+    state.slot = null;
+    renderCalendar();
+    renderSlots();
+    evalStep2();
+  });
+});
+
+function evalStep2(){ next2.disabled = !(state.date && state.slot); }
+next2.addEventListener('click', ()=>gotoStep(3));
+
+/* ─────────────────────────────────────────────────────────────
+   STEP 3
+───────────────────────────────────────────────────────────── */
+const next3 = document.getElementById('next3');
+const f = id=>document.getElementById(id);
+['firstName','lastName','phone','address'].forEach(id=>{
+  f(id).addEventListener('input', e=>{state[id]=e.target.value.trim(); evalStep3()});
+});
+document.querySelectorAll('input[name=src]').forEach(i=>i.addEventListener('change', e=>{state.src=e.target.value}));
+function evalStep3(){
+  next3.disabled = !(state.firstName && state.lastName && state.phone.replace(/\D/g,'').length>=10 && state.address);
+}
+next3.addEventListener('click', ()=>{ renderReview(); gotoStep(4); });
+
+/* ─────────────────────────────────────────────────────────────
+   STEP 4 — REVIEW
+───────────────────────────────────────────────────────────── */
+function renderReview(){
+  const d = state.date;
+  const dayStr = `${DOW[d.getDay()]}, ${MONTH_NAMES[d.getMonth()]} ${d.getDate()}`;
+  const timeStr = `${formatTime(state.slot)} · ${state.duration} min`;
+  f('rWhenDay').textContent = dayStr;
+  f('rWhenTime').textContent = timeStr;
+  f('rType').textContent = state.ftype;
+  f('rLF').textContent = state.lf || '—';
+  f('rTL').textContent = state.tl || '—';
+  if(state.notes){ f('rNotesRow').style.display='flex'; f('rNotes').textContent = state.notes; }
+  f('rName').textContent = `${state.firstName} ${state.lastName}`;
+  f('rPhone').textContent = state.phone;
+  f('rAddr').textContent = state.address;
+  if(state.src){ f('rSrcRow').style.display='flex'; f('rSrc').textContent = state.src; }
+}
+
+document.getElementById('submitBtn').addEventListener('click', async ()=>{
+  const btn = document.getElementById('submitBtn');
+  btn.disabled = true;
+  btn.innerHTML = 'Locking your slot...';
+  // PROTOTYPE — in production this POSTs to /api/walkthrough → Supabase insert + Twilio SMS
+  await new Promise(r=>setTimeout(r,900));
+  const d = state.date;
+  f('cWhenDay').textContent = `${DOW[d.getDay()]}, ${MONTH_NAMES[d.getMonth()]} ${d.getDate()}`;
+  f('cWhenTime').textContent = `${formatTime(state.slot)} · ${state.duration} min`;
+  gotoStep(5);
+});
+</script>
+
+</body>
+</html>

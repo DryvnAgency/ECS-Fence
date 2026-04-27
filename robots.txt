@@ -1,0 +1,3 @@
+User-agent: *
+Disallow: /pages/ops-7d4f9a2c/
+Disallow: /ops-7d4f9a2c/
