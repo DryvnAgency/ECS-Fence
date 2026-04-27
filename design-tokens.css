@@ -1,0 +1,255 @@
+/* ECS Fence — Design Tokens
+   Drop into any page: <link rel="stylesheet" href="colors_and_type.css">
+   Then use the CSS vars / semantic classes below. */
+
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Serif+Display:ital@0;1&family=Outfit:wght@300;400;500;600;700&display=swap');
+
+:root {
+  /* ─── Color ─────────────────────────────────────────────── */
+  --cream:        #F7F4EE;   /* page bg — newsprint warm */
+  --cream-soft:   #FBF9F4;   /* alternate section */
+  --cream-dark:   #EFEBE2;   /* deeper alt — stats, included */
+  --paper:        #FFFFFF;   /* cards, pills */
+  --ink:          #16181C;   /* primary text, dark section */
+  --ink-soft:     #2A2D33;   /* heavy body */
+  --red:          #C8232F;   /* THE accent — one word per headline */
+  --red-dark:     #9E1820;   /* primary-button hover */
+  --red-soft:     #FCE9EB;   /* icon-tile fill, callout strip */
+  --dim:          #6B6E78;   /* captions, fine print */
+  --line:         rgba(22,24,28,.08);
+  --line-strong:  rgba(22,24,28,.14);
+
+  /* Semantic foreground / background aliases */
+  --fg1: var(--ink);
+  --fg2: var(--ink-soft);
+  --fg3: var(--dim);
+  --bg1: var(--cream);
+  --bg2: var(--cream-soft);
+  --bg3: var(--cream-dark);
+  --accent: var(--red);
+  --accent-fg: var(--cream);
+
+  /* ─── Type families ──────────────────────────────────────── */
+  --font-display: 'Bebas Neue', 'Arial Black', sans-serif;
+  --font-serif-i: 'DM Serif Display', Georgia, serif;
+  --font-ui:      'Outfit', Helvetica, Arial, sans-serif;
+
+  /* ─── Type sizes (fluid where it matters) ────────────────── */
+  --fs-h1: clamp(64px, 8.5vw, 128px);
+  --fs-h2: clamp(44px, 5.5vw, 72px);
+  --fs-h3: 32px;
+  --fs-h4: 24px;
+  --fs-lede: 19px;
+  --fs-body: 15px;
+  --fs-small: 13px;
+  --fs-micro: 11px;
+  --fs-stat: 60px;
+
+  /* ─── Spacing ────────────────────────────────────────────── */
+  --sp-1: 4px;
+  --sp-2: 8px;
+  --sp-3: 12px;
+  --sp-4: 16px;
+  --sp-5: 24px;
+  --sp-6: 32px;
+  --sp-7: 48px;
+  --sp-8: 64px;
+  --sp-9: 104px;          /* default section padding */
+
+  /* ─── Radii ──────────────────────────────────────────────── */
+  --r-sm: 4px;            /* buttons, micro tags, callouts */
+  --r-md: 6px;            /* cards, hero visual, services */
+  --r-lg: 10px;           /* icon tiles inside cards */
+  --r-pill: 999px;        /* trust pills only */
+
+  /* ─── Borders ────────────────────────────────────────────── */
+  --border: 1px solid var(--line);
+  --border-strong: 1px solid var(--line-strong);
+  --border-accent-top: 3px solid var(--red);
+
+  /* ─── Shadows ────────────────────────────────────────────── */
+  --shadow:    0 1px 3px rgba(22,24,28,.04), 0 8px 24px -8px rgba(22,24,28,.08);
+  --shadow-lg: 0 4px 6px rgba(22,24,28,.04), 0 20px 50px -10px rgba(22,24,28,.12);
+  --shadow-cta: 0 6px 16px -6px rgba(200,35,47,.5);
+  --shadow-cta-hover: 0 10px 24px -8px rgba(200,35,47,.6);
+
+  /* ─── Motion ─────────────────────────────────────────────── */
+  --ease: cubic-bezier(.2,.6,.2,1);
+  --t-fast: .2s ease;
+  --t-card: .25s ease;
+}
+
+/* ─── Base ─────────────────────────────────────────────────── */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--font-ui);
+  color: var(--fg1);
+  background: var(--bg1);
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+img { max-width: 100%; display: block; }
+a   { color: inherit; text-decoration: none; }
+
+/* ─── Semantic type ────────────────────────────────────────── */
+h1, .h1 {
+  font-family: var(--font-display);
+  font-size: var(--fs-h1);
+  line-height: .92;
+  letter-spacing: .005em;
+  font-weight: 400;
+}
+h2, .h2 {
+  font-family: var(--font-display);
+  font-size: var(--fs-h2);
+  line-height: .98;
+  letter-spacing: .005em;
+  font-weight: 400;
+}
+h3, .h3 {
+  font-family: var(--font-display);
+  font-size: var(--fs-h3);
+  line-height: 1.05;
+  letter-spacing: .005em;
+  font-weight: 400;
+}
+h4, .h4 {
+  font-family: var(--font-display);
+  font-size: var(--fs-h4);
+  letter-spacing: .03em;
+  font-weight: 400;
+}
+.lede {
+  font-size: var(--fs-lede);
+  line-height: 1.55;
+  color: var(--fg1);
+}
+p, .body { font-size: var(--fs-body); line-height: 1.55; }
+small, .small { font-size: var(--fs-small); color: var(--fg3); }
+
+.serif-i {
+  font-family: var(--font-serif-i);
+  font-style: italic;
+  font-weight: 400;
+}
+.em-i { /* mid-headline italic phrase */
+  font-family: var(--font-serif-i);
+  font-style: italic;
+  font-weight: 400;
+}
+.red { color: var(--red); }
+
+.micro {
+  font-family: var(--font-ui);
+  text-transform: uppercase;
+  letter-spacing: .18em;
+  font-weight: 700;
+  font-size: var(--fs-micro);
+}
+.micro-line {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+}
+.micro-line::before {
+  content: "";
+  width: 24px;
+  height: 2px;
+  background: var(--red);
+}
+.micro-red { color: var(--red); }
+
+/* ─── Buttons ──────────────────────────────────────────────── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 14px 24px;
+  border-radius: var(--r-sm);
+  font-family: var(--font-ui);
+  font-weight: 600;
+  font-size: 14px;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  border: none;
+  cursor: pointer;
+  transition: all var(--t-fast);
+}
+.btn-primary {
+  background: var(--red);
+  color: var(--cream);
+  box-shadow: var(--shadow-cta);
+}
+.btn-primary:hover {
+  background: var(--red-dark);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-cta-hover);
+}
+.btn-ghost {
+  background: transparent;
+  color: var(--ink);
+  border: 1.5px solid var(--ink);
+}
+.btn-ghost:hover {
+  background: var(--ink);
+  color: var(--cream);
+}
+.btn svg { width: 14px; height: 14px; }
+
+/* ─── Cards ────────────────────────────────────────────────── */
+.card {
+  background: var(--paper);
+  border-radius: var(--r-md);
+  box-shadow: var(--shadow);
+  padding: 28px;
+}
+.card-accent {
+  border-top: var(--border-accent-top);
+}
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+  transition: transform var(--t-card), box-shadow var(--t-card);
+}
+
+/* ─── Pills ────────────────────────────────────────────────── */
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  border-radius: var(--r-pill);
+  background: var(--paper);
+  border: var(--border);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--fg1);
+  box-shadow: var(--shadow);
+}
+.pill svg { width: 16px; height: 16px; color: var(--red); flex: none; }
+
+/* ─── Icon tile ────────────────────────────────────────────── */
+.icon-tile {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--r-lg);
+  background: var(--red-soft);
+  color: var(--red);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+}
+.icon-tile svg { width: 22px; height: 22px; }
+
+/* ─── Layout helpers ───────────────────────────────────────── */
+.wrap {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+section.sect { padding: var(--sp-9) 0; }
+@media (max-width: 720px) { section.sect { padding: var(--sp-8) 0; } }
