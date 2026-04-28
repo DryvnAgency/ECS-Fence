@@ -441,14 +441,14 @@ h1{
 
   <div class="error" id="errorBox">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-    <span id="errorText">That email or password didn't match. Try again.</span>
+    <span id="errorText">That username or password didn't match. Try again.</span>
   </div>
 
   <div class="field">
-    <label for="email">Email</label>
+    <label for="username">Username</label>
     <div class="field-input">
-      <input type="email" id="email" name="email" placeholder="you@ecsfence.com" autocomplete="username" required/>
-      <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+      <input type="text" id="username" name="username" placeholder="EdgarM" autocomplete="username" autocapitalize="off" autocorrect="off" spellcheck="false" required/>
+      <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
     </div>
   </div>
 
@@ -496,32 +496,57 @@ togglePw.addEventListener('click', ()=>{
   togglePw.setAttribute('aria-label', isPw ? 'Hide password' : 'Show password');
 });
 
-// Prototype submit handler
+// Supabase config — fill these in. The anon key is safe to expose;
+// row-level-security policies in Supabase do the actual gating.
+const SUPABASE_URL = 'https://wfhhzidwiczlokebunkt.supabase.co';
+const SUPABASE_ANON_KEY = '__SUPABASE_ANON_KEY__';
+const EMAIL_DOMAIN = 'ops.ecsfence.com';
+
 const form = document.getElementById('loginForm');
 const signBtn = document.getElementById('signBtn');
 const errorBox = document.getElementById('errorBox');
 const errorText = document.getElementById('errorText');
+const signBtnHTML = signBtn.innerHTML;
+
+let supabasePromise = null;
+async function getSupabase(){
+  if(!supabasePromise){
+    supabasePromise = import('https://esm.sh/@supabase/supabase-js@2')
+      .then(m => m.createClient(SUPABASE_URL, SUPABASE_ANON_KEY));
+  }
+  return supabasePromise;
+}
 
 form.addEventListener('submit', async (e)=>{
   e.preventDefault();
   errorBox.classList.remove('show');
-  const email = document.getElementById('email').value.trim();
+  const username = document.getElementById('username').value.trim();
   const pw = pwInput.value;
-  if(!email || !pw){
-    errorText.textContent = 'Email and password are both required.';
+  if(!username || !pw){
+    errorText.textContent = 'Username and password are both required.';
+    errorBox.classList.add('show');
+    return;
+  }
+  if(SUPABASE_ANON_KEY.startsWith('__')){
+    errorText.textContent = 'Login is not configured yet. Text Edgar to get added.';
     errorBox.classList.add('show');
     return;
   }
   signBtn.disabled = true;
   signBtn.innerHTML = 'Signing in…';
-  // PROTOTYPE — in production POSTs to Supabase Auth via Server Action
-  await new Promise(r=>setTimeout(r, 900));
-  // Demo: pretend success
-  signBtn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Welcome back';
-  setTimeout(()=>{
+  try{
+    const supabase = await getSupabase();
+    const email = `${username.toLowerCase()}@${EMAIL_DOMAIN}`;
+    const { error } = await supabase.auth.signInWithPassword({ email, password: pw });
+    if(error) throw error;
+    signBtn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Welcome back';
+    window.location.assign('./');
+  }catch(err){
     signBtn.disabled = false;
-    signBtn.innerHTML = 'Sign in <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>';
-  }, 1400);
+    signBtn.innerHTML = signBtnHTML;
+    errorText.textContent = 'That username or password didn’t match. Try again.';
+    errorBox.classList.add('show');
+  }
 });
 </script>
 
