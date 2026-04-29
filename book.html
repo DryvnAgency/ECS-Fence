@@ -277,7 +277,8 @@ button,input,select,textarea{font:inherit;color:inherit}
 nav.top{position:sticky;top:0;z-index:50;background:rgba(247,244,238,.92);border-bottom:1px solid var(--line);backdrop-filter:saturate(180%) blur(14px);-webkit-backdrop-filter:saturate(180%) blur(14px)}
 nav.top .wrap{display:flex;align-items:center;justify-content:space-between;height:78px;max-width:1280px}
 .brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--ink)}
-.brand img{width:40px;height:40px;object-fit:contain}
+.brand .brand-mark{width:40px;height:40px;flex:none;display:grid;place-items:center;background:var(--red);color:var(--cream);font-family:var(--font-display);font-size:26px;line-height:1;letter-spacing:.02em;border-radius:var(--r-sm);transition:transform .4s var(--ease)}
+.brand:hover .brand-mark{transform:rotate(-4deg) scale(1.05)}
 .brand-name{font-family:var(--font-display);font-size:24px;font-weight:400;letter-spacing:.02em;line-height:1}
 .brand-tag{font-size:11px;color:var(--dim);letter-spacing:.06em;text-transform:uppercase;margin-top:4px}
 .nav-right{display:flex;align-items:center;gap:18px}
@@ -459,7 +460,7 @@ footer a:hover{color:var(--red)}
 <nav class="top">
   <div class="wrap">
     <a href="index.html" class="brand">
-      <img src="brand/logo-primary-dark.png" alt="ECS Fence"/>
+      <div class="brand-mark" aria-hidden="true">E</div>
       <div>
         <div class="brand-name">ECS Fence</div>
         <div class="brand-tag">Crafted &amp; built to last</div>
@@ -518,6 +519,8 @@ footer a:hover{color:var(--red)}
               <div class="tile"><input type="radio" name="ftype" id="t-gates" value="Gates"><label for="t-gates"><span class="tile-num">04</span><span class="tile-name">Gates</span><span class="tile-sub">Walk, drive, automated</span></label></div>
               <div class="tile"><input type="radio" name="ftype" id="t-comm" value="Commercial"><label for="t-comm"><span class="tile-num">05</span><span class="tile-name">Commercial</span><span class="tile-sub">Backstop, perimeter</span></label></div>
               <div class="tile"><input type="radio" name="ftype" id="t-rep" value="Repairs"><label for="t-rep"><span class="tile-num">06</span><span class="tile-name">Repairs</span><span class="tile-sub">Posts, panels, hardware</span></label></div>
+              <div class="tile"><input type="radio" name="ftype" id="t-vinyl" value="Vinyl"><label for="t-vinyl"><span class="tile-num">07</span><span class="tile-name">Vinyl</span><span class="tile-sub">Low-maintenance privacy</span></label></div>
+              <div class="tile"><input type="radio" name="ftype" id="t-stain" value="Staining"><label for="t-stain"><span class="tile-num">08</span><span class="tile-name">Staining</span><span class="tile-sub">Refinish &amp; protect</span></label></div>
             </div>
           </div>
 
@@ -544,8 +547,9 @@ footer a:hover{color:var(--red)}
           </div>
 
           <div class="field" style="margin-bottom:0">
-            <label for="notes">Anything else? <span style="text-transform:none;letter-spacing:0;color:var(--dim);font-weight:400;font-size:11px">(optional)</span></label>
-            <textarea id="notes" name="notes" placeholder="Dog jumped the gate twice. HOA wants no chain link visible from the street. Pool inspector calls Tuesday — anything you want us to know."></textarea>
+            <label for="notes">Explain your vision</label>
+            <p class="serif-i" style="font-size:18px;color:var(--ink-soft);margin:0 0 12px 0;line-height:1.45">Any project you have — we'll tackle it together. We have your back, and we'll make your vision come true.</p>
+            <textarea id="notes" name="notes" placeholder="Tell us what you're picturing. Heights, materials, gate placements, the corner that always blows out in storms — anything that helps us walk it with you."></textarea>
           </div>
         </div>
 

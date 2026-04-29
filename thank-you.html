@@ -28,12 +28,13 @@ html,body{background:var(--cream);color:var(--ink);font-family:var(--font-sans);
 nav.top{position:sticky;top:0;z-index:50;background:rgba(247,244,238,.92);border-bottom:1px solid var(--line);backdrop-filter:saturate(180%) blur(14px);-webkit-backdrop-filter:saturate(180%) blur(14px)}
 nav.top .wrap{display:flex;align-items:center;justify-content:space-between;height:78px;max-width:1280px}
 .brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--ink)}
-.brand img{width:40px;height:40px;object-fit:contain}
+.brand .brand-mark{width:40px;height:40px;flex:none;display:grid;place-items:center;background:var(--red);color:var(--cream);font-family:var(--font-display);font-size:26px;line-height:1;letter-spacing:.02em;border-radius:4px;transition:transform .4s cubic-bezier(.2,.6,.2,1)}
+.brand:hover .brand-mark{transform:rotate(-4deg) scale(1.05)}
 .brand-name{font-family:var(--font-display);font-size:22px;font-weight:600;letter-spacing:-.01em}
 .brand-tag{font-size:11px;color:var(--muted);letter-spacing:.06em;text-transform:uppercase;margin-top:1px}
 .phone-link{display:inline-flex;align-items:center;gap:8px;text-decoration:none;color:var(--ink);font-weight:600;font-size:15px}
 .phone-link svg{width:16px;height:16px;color:var(--red)}
-@media(max-width:560px){nav.top .wrap{height:64px}.brand img{width:34px;height:34px}.brand-name{font-size:18px}.brand-tag{display:none}}
+@media(max-width:560px){nav.top .wrap{height:64px}.brand .brand-mark{width:34px;height:34px;font-size:22px}.brand-name{font-size:18px}.brand-tag{display:none}}
 
 /* HERO confirmation */
 .confirm{padding:80px 0 60px;text-align:center;position:relative}
@@ -132,7 +133,7 @@ footer a:hover{color:var(--red)}
 <nav class="top">
   <div class="wrap">
     <a href="index.html" class="brand">
-      <img src="brand/logo-primary-dark.png" alt="ECS Fence"/>
+      <div class="brand-mark" aria-hidden="true">E</div>
       <div>
         <div class="brand-name">ECS Fence</div>
         <div class="brand-tag">Crafted &amp; built to last</div>
@@ -223,7 +224,7 @@ footer a:hover{color:var(--red)}
         <div class="prep-num"><span>06</span>The decision-makers</div>
         <h3>Who else has a say?</h3>
         <p class="desc">Spouse, partner, neighbor on a shared line, business partner, board approval? If anyone else needs to weigh in, the walkthrough is the easiest time to get them in the loop.</p>
-        <div class="why"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg><span><b>Why it matters:</b> Saves a second visit. Same-day quote means same-day decision — if everyone who needs to see it has seen it.</span></div>
+        <div class="why"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg><span><b>Why it matters:</b> Saves a second visit. A 24-hour quote means a 24-hour decision — if everyone who needs to see it has seen it.</span></div>
       </div>
 
     </div>

@@ -315,7 +315,7 @@ nav.top{position:sticky;top:0;z-index:50;background:rgba(247,244,238,.86);border
 nav.top.scrolled{background:rgba(247,244,238,.96);box-shadow:0 1px 0 rgba(0,0,0,.04)}
 nav.top .wrap{display:flex;align-items:center;justify-content:space-between;height:78px}
 .brand{display:flex;align-items:center;gap:12px}
-.brand-mark{width:36px;height:36px;flex:none;transition:transform .4s var(--ease)}
+.brand-mark{width:40px;height:40px;flex:none;display:grid;place-items:center;background:var(--red);color:var(--cream);font-family:var(--font-display);font-size:26px;line-height:1;letter-spacing:.02em;border-radius:var(--r-sm);transition:transform .4s var(--ease)}
 .brand:hover .brand-mark{transform:rotate(-4deg) scale(1.05)}
 .brand-name{font-family:var(--font-display);font-size:25px;letter-spacing:.06em;line-height:1}
 .brand-sub{font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--dim);font-weight:600;margin-top:2px}
@@ -326,7 +326,16 @@ nav.top .wrap{display:flex;align-items:center;justify-content:space-between;heig
 .nav-links a:not(.btn):not(.phone-link):hover::after{transform:scaleX(1);transform-origin:left}
 .phone-link{display:inline-flex;align-items:center;gap:9px;font-family:var(--font-display);font-size:19px;letter-spacing:.04em}
 .phone-link svg{width:14px;height:14px;color:var(--red)}
-@media(max-width:1000px){.nav-links a:not(.btn):not(.phone-link){display:none}}
+.menu-btn{display:none;width:44px;height:44px;background:transparent;border:none;cursor:pointer;align-items:center;justify-content:center;padding:0;color:var(--ink)}
+.menu-btn svg{width:24px;height:24px;transition:transform .25s var(--ease)}
+.menu-btn[aria-expanded="true"] svg{transform:rotate(90deg);color:var(--red)}
+.mobile-menu{display:none;position:absolute;left:0;right:0;top:78px;background:rgba(247,244,238,.98);backdrop-filter:saturate(180%) blur(12px);-webkit-backdrop-filter:saturate(180%) blur(12px);border-top:1px solid var(--line);border-bottom:1px solid var(--line);box-shadow:var(--shadow);z-index:50}
+.mobile-menu.open{display:block}
+.mobile-menu .wrap{display:flex;flex-direction:column;padding:8px 0}
+.mobile-menu a{display:block;padding:18px 0;font-size:16px;font-weight:500;color:var(--ink);border-bottom:1px solid var(--line);transition:color .2s}
+.mobile-menu a:last-child{border-bottom:none}
+.mobile-menu a:hover,.mobile-menu a:focus-visible{color:var(--red)}
+@media(max-width:1000px){.nav-links a:not(.btn):not(.phone-link){display:none}.menu-btn{display:inline-flex}.nav-links{gap:14px}}
 
 /* ───────────────────────────── HERO ─────────────────────────────────── */
 .hero{padding:64px 0 0;position:relative}
@@ -786,7 +795,7 @@ footer .bar{border-top:1px solid rgba(247,244,238,.1);padding-top:24px;display:f
 <nav class="top" id="nav">
   <div class="wrap">
     <a href="#" class="brand">
-      <img class="brand-mark" src="brand/logo-primary-cream.png" alt="ECS Fence" style="width:40px;height:40px;object-fit:contain"/>
+      <div class="brand-mark" aria-hidden="true">E</div>
       <div>
         <div class="brand-name">ECS Fence</div>
         <div class="brand-sub">Crafted &amp; Built To Last</div>
@@ -802,6 +811,17 @@ footer .bar{border-top:1px solid rgba(247,244,238,.1);padding-top:24px;display:f
         (757) 597-4513
       </a>
       <a href="book.html" class="btn btn-primary"><span>Free walkthrough</span></a>
+      <button class="menu-btn" id="menuBtn" type="button" aria-expanded="false" aria-controls="mobileMenu" aria-label="Open menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg>
+      </button>
+    </div>
+  </div>
+  <div class="mobile-menu" id="mobileMenu" hidden>
+    <div class="wrap">
+      <a href="#help">How we help</a>
+      <a href="#process">The process</a>
+      <a href="#services">What we install</a>
+      <a href="#referral">$100 referral</a>
     </div>
   </div>
 </nav>
@@ -826,7 +846,7 @@ footer .bar{border-top:1px solid rgba(247,244,238,.1);padding-top:24px;display:f
           <span class="free-tag"><span class="dot"></span><span class="txt"><strong>No fee. No hard sell.</strong> Just an estimate.</span></span>
         </div>
         <div class="hero-pills reveal">
-          <span class="hero-pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Same-Day Written Quote</span>
+          <span class="hero-pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>24-Hour Written Quote</span>
           <span class="hero-pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Owner On Every Job</span>
           <span class="hero-pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>1-Yr Workmanship Warranty</span>
           <span class="hero-pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Insured</span>
@@ -953,7 +973,8 @@ footer .bar{border-top:1px solid rgba(247,244,238,.1);padding-top:24px;display:f
 
       <div class="help-card">
         <div class="photo kb">
-          <img src="photos/aluminum-04-decorative-residential.jpg" alt="Decorative aluminum fence to pool code — ECS Fence install"/>
+          <!-- TODO: replace with actual pool photo when Edgar uploads -->
+          <img src="photos/aluminum-curb-appeal.jpg" alt="Pool-code aluminum fence enclosing a residential yard — ECS Fence install"/>
           <span class="num">03 · Pool</span>
           <span class="topic">Insurance signs off first try</span>
         </div>
@@ -966,7 +987,7 @@ footer .bar{border-top:1px solid rgba(247,244,238,.1);padding-top:24px;display:f
 
       <div class="help-card">
         <div class="photo kb">
-          <img src="photos/aluminum-curb-appeal.jpg" alt="Black ornamental aluminum fence in residential front yard — curb appeal that closes"/>
+          <img src="photos/wood-02-privacy-long-run-portrait.jpg" alt="Long-run cedar privacy fence — curb appeal that closes"/>
           <span class="num">04 · Selling</span>
           <span class="topic">Curb appeal that closes</span>
         </div>
@@ -1051,8 +1072,8 @@ footer .bar{border-top:1px solid rgba(247,244,238,.1);padding-top:24px;display:f
   <div class="wrap">
     <div class="sect-head reveal">
       <span class="micro micro-line micro-red">Materials we work in</span>
-      <h2>Six categories. <span class="red">Done right.</span></h2>
-      <p class="kicker">Wood, chain link, iron and aluminum, plus gates, automated openers, and commercial work. Whatever the job needs — that's what we install.</p>
+      <h2>Eight categories. <span class="red">Done right.</span></h2>
+      <p class="kicker">Wood, vinyl, chain link, iron and aluminum, plus gates, commercial and industrial perimeter, repairs, and staining. Whatever the job needs — that's what we install.</p>
     </div>
     <div class="svc-grid reveal-stagger">
       <a class="svc">
@@ -1061,9 +1082,10 @@ footer .bar{border-top:1px solid rgba(247,244,238,.1);padding-top:24px;display:f
         <div class="body"><div class="tag">01 Wood</div><h4>Cedar &amp; Pine</h4><p>Privacy, cap-board, custom heights. Sealed or stained.</p></div>
       </a>
       <a class="svc">
-        <img src="photos/commercial-13-pickleball.jpg" alt="Commercial chain link enclosure on a sports court — ECS install"/>
+        <!-- TODO: replace with actual vinyl photo when available -->
+        <img src="photos/aluminum-04-decorative-residential.jpg" alt="White vinyl privacy fence in a residential yard — ECS install"/>
         <div class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></div>
-        <div class="body"><div class="tag">02 Commercial</div><h4>Sports &amp; Municipal</h4><p>Backstops, courts, perimeter. Built for daily use.</p></div>
+        <div class="body"><div class="tag">02 Vinyl</div><h4>Vinyl Privacy</h4><p>Low-maintenance privacy and semi-private styles. Won't rot, won't peel.</p></div>
       </a>
       <a class="svc">
         <img src="photos/chainlink-05-residential.jpg" alt="Black residential chain link — ECS install"/>
@@ -1081,9 +1103,20 @@ footer .bar{border-top:1px solid rgba(247,244,238,.1);padding-top:24px;display:f
         <div class="body"><div class="tag">05 Gates</div><h4>Gates &amp; Operators</h4><p>Walk, drive, and automated openers. Installed &amp; serviced.</p></div>
       </a>
       <a class="svc">
+        <img src="photos/commercial-13-pickleball.jpg" alt="Commercial chain link enclosure on a sports court — ECS install"/>
+        <div class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></div>
+        <div class="body"><div class="tag">06 Commercial</div><h4>Commercial &amp; Industrial</h4><p>Backstops, courts, municipal perimeter, industrial sites. Built for daily use.</p></div>
+      </a>
+      <a class="svc">
         <img src="photos/commercial-12-barbed-wire.jpg" alt="Industrial security fence — ECS install"/>
         <div class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></div>
-        <div class="body"><div class="tag">06 Repairs &amp; Security</div><h4>Repairs &amp; Industrial</h4><p>Panels. Posts. Hardware. Barbed wire and security upgrades.</p></div>
+        <div class="body"><div class="tag">07 Repairs</div><h4>Repairs &amp; Security</h4><p>Panels. Posts. Hardware. Barbed wire and security upgrades.</p></div>
+      </a>
+      <a class="svc">
+        <!-- TODO: swap to a dedicated staining/refinish photo when available -->
+        <img src="photos/wood-fb-cedar-privacy.jpg" alt="Stained cedar privacy fence — ECS Fence finish work"/>
+        <div class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></div>
+        <div class="body"><div class="tag">08 Staining</div><h4>Sealing &amp; Staining</h4><p>Cedar, pine, or composite. Brought back, sealed, and warrantied.</p></div>
       </a>
     </div>
   </div>
@@ -1210,6 +1243,7 @@ footer .bar{border-top:1px solid rgba(247,244,238,.1);padding-top:24px;display:f
   <div class="wrap">
     <span class="micro micro-line micro-red">Ready when you are</span>
     <h2>Here's <span class="em-i">the deal.</span></h2>
+    <p class="serif-i" style="font-size:24px;color:var(--red);margin:0 auto 20px;max-width:760px;line-height:1.3">Any project you want to tackle, we'll tackle it together.</p>
     <p class="sub">Pick a 30-minute slot. We show up, walk the yard, and follow up with a written quote within 24 hours. Costs you nothing. That's the whole thing.</p>
     <div class="ctas">
       <a href="book.html" class="btn btn-primary btn-xl">
@@ -1227,7 +1261,7 @@ footer .bar{border-top:1px solid rgba(247,244,238,.1);padding-top:24px;display:f
   <div class="wrap">
     <div class="grid">
       <div class="brand-block">
-        <img class="brand-mark" src="brand/logo-primary-dark.png" alt="ECS Fence" style="width:54px;height:54px;object-fit:contain"/>
+        <div class="brand-mark" aria-hidden="true" style="width:54px;height:54px;font-size:34px">E</div>
         <div class="brand-name">ECS Fence</div>
         <div class="tag">Crafted &amp; built to last.</div>
         <p style="font-size:13px;line-height:1.6;color:rgba(247,244,238,.6);max-width:280px">Owner-operated. Free walkthroughs and written quotes across eastern Nebraska.</p>
@@ -1238,7 +1272,7 @@ footer .bar{border-top:1px solid rgba(247,244,238,.1);padding-top:24px;display:f
       </div>
       <div>
         <h5>What we do</h5>
-        <ul><li>Wood fences</li><li>Vinyl fences</li><li>Chain link</li><li>Iron &amp; aluminum</li><li>Gates &amp; operators</li><li>Repairs</li></ul>
+        <ul><li>Wood fences</li><li>Vinyl fences</li><li>Chain link</li><li>Iron &amp; aluminum</li><li>Gates &amp; operators</li><li>Commercial &amp; industrial</li><li>Repairs</li><li>Sealing &amp; staining</li></ul>
       </div>
       <div>
         <h5>Get in touch</h5>
@@ -1303,6 +1337,18 @@ const io = new IntersectionObserver((entries) => {
   entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
 }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
 document.querySelectorAll('.reveal, .reveal-l, .reveal-r, .reveal-stagger, .kb, .mask-up').forEach(el => io.observe(el));
+
+// Mobile menu toggle
+const menuBtn = document.getElementById('menuBtn');
+const mobileMenu = document.getElementById('mobileMenu');
+function setMenu(open){
+  menuBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+  menuBtn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+  if (open) { mobileMenu.removeAttribute('hidden'); mobileMenu.classList.add('open'); }
+  else { mobileMenu.classList.remove('open'); mobileMenu.setAttribute('hidden',''); }
+}
+menuBtn.addEventListener('click', () => setMenu(menuBtn.getAttribute('aria-expanded') !== 'true'));
+mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => setMenu(false)));
 
 // Nav state
 const nav = document.getElementById('nav');
@@ -1380,16 +1426,16 @@ window.addEventListener('DOMContentLoaded', () => {
   const closeBtn = modal.querySelector('.svc-modal-close');
 
   const COPY = {
-    'wood':       {title:'Cedar &amp; pine \u2014 <span class="em-i">great choice.</span>', body:"Privacy fence, cap-board, custom heights \u2014 sealed or stained. Send a text or give us a call and we'll book a walkthrough of your yard. Free, on-site, written quote same day."},
+    'wood':       {title:'Cedar &amp; pine \u2014 <span class="em-i">great choice.</span>', body:"Privacy fence, cap-board, custom heights \u2014 sealed or stained. Send a text or give us a call and we'll book a walkthrough of your yard. Free, on-site, 24-hour written quote."},
     'commercial': {title:'Commercial work \u2014 <span class="em-i">we got you.</span>', body:"Backstops, sports courts, perimeter, municipal \u2014 built for daily use. Text or call to book a walkthrough; we'll meet your team on-site and quote it in writing."},
-    'chain':      {title:'Chain link \u2014 <span class="em-i">great choice.</span>', body:"Galvanized, black, or vinyl-coated. Residential or commercial. Send a text or call us \u2014 we'll come walk the line, take measurements, and have a written quote in your hand same day."},
+    'chain':      {title:'Chain link \u2014 <span class="em-i">great choice.</span>', body:"Galvanized, black, or vinyl-coated. Residential or commercial. Send a text or call us \u2014 we'll come walk the line, take measurements, and have a 24-hour written quote in your hand."},
     'iron':       {title:'Iron &amp; aluminum \u2014 <span class="em-i">great choice.</span>', body:"Pool code, decorative, or security \u2014 powder-coated and built to pass inspection first try. Text or call to book a free on-site walkthrough."},
-    'gates':      {title:'Gates &amp; operators \u2014 <span class="em-i">great choice.</span>', body:"Walk gates, drive gates, automated openers \u2014 installed and serviced. Send a text or call us; we'll come look at the opening, listen to what you need, and have a written quote same day."},
+    'gates':      {title:'Gates &amp; operators \u2014 <span class="em-i">great choice.</span>', body:"Walk gates, drive gates, automated openers \u2014 installed and serviced. Send a text or call us; we'll come look at the opening, listen to what you need, and have a 24-hour written quote."},
     'repairs':    {title:'Repairs &amp; security \u2014 <span class="em-i">we got you.</span>', body:"Panels, posts, hardware, barbed wire, security upgrades. Text or call to book a walkthrough \u2014 we'll give you an honest assessment, not a sales pitch."}
   };
 
   function open(key){
-    const c = COPY[key] || {title:"Let's bring your <span class=\"em-i\">project</span> to life.", body:"Send a text or give us a call \u2014 we'll book a free walkthrough of your vision and have a written quote in your hand same day."};
+    const c = COPY[key] || {title:"Let's bring your <span class=\"em-i\">project</span> to life.", body:"Send a text or give us a call \u2014 we'll book a free walkthrough of your vision and have a 24-hour written quote in your hand."};
     titleEl.innerHTML = c.title;
     bodyEl.innerHTML = c.body;
     modal.classList.add('show');
