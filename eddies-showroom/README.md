@@ -2,6 +2,19 @@
 
 A multi-page HTML prototype for a bilingual (EN/ES) used-car dealership site, built around Eddie Marquez — a real, named salesperson. Three pages, all interactive, all linked.
 
+## Connections
+
+| System | Project | URL / ID |
+| --- | --- | --- |
+| GitHub  | `DryvnAgency/EddiesShowroom`              | https://github.com/DryvnAgency/EddiesShowroom |
+| Supabase | `EddiesShowroom` (`tfzxorwfafzwatmsqdxz`) | https://tfzxorwfafzwatmsqdxz.supabase.co |
+| Vercel   | `project-mbjr6` (`prj_OPmNucfGMWWNbZFcwJUG1OnC8sjt`) | https://vercel.com/dryvnagency-1422s-projects/project-mbjr6 |
+
+Schema for the three tables (`vehicles`, `leads`, `settings`) plus RLS and the `vehicle-photos` storage bucket has been applied. Connection helper lives in `supabase.js`; env template in `.env.example`.
+
+To wire Vercel to GitHub: in the Vercel project settings, connect the `DryvnAgency/EddiesShowroom` repo and set the framework to "Other" (no build step needed for the CDN prototype). `vercel.json` already configures the pretty-URL rewrites for `/v/:slug` and `/admin/:screen`.
+
+
 ## Files
 
 ```

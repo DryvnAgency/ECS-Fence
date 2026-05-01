@@ -1,0 +1,6 @@
+{
+  "rewrites": [
+    { "source": "/v/:slug", "destination": "/car.html?slug=:slug" },
+    { "source": "/admin/:screen", "destination": "/admin.html?screen=:screen" }
+  ]
+}
