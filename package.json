@@ -1,0 +1,9 @@
+{
+  "name": "ecs-fence",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "dependencies": {
+    "@vercel/edge": "^1.2.1"
+  }
+}
