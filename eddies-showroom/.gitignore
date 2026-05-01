@@ -1,0 +1,12 @@
+# Vercel CLI link metadata — local only
+.vercel/
+
+# Env files — values live in .env.example as templates
+.env
+.env.local
+.env.*.local
+
+# Editor / OS
+.DS_Store
+*.swp
+node_modules/
