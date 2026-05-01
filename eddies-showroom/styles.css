@@ -1,0 +1,270 @@
+/* =============================================================
+   Eddie's Showroom — design tokens + global styles
+   Monochromatic aesthetic: light gray paper / deep navy ink / steel-blue accent
+   ============================================================= */
+
+:root {
+  /* Palette — monochromatic dark navy + slate grays */
+  --paper: #1A2438;          /* deep slate-navy page bg */
+  --paper-2: #232E45;         /* card surface */
+  --paper-3: #2E3A52;         /* deeper still, for chips */
+  --ink: #E5EAF2;            /* near-white cool text */
+  --ink-2: #B4BDCC;           /* secondary text */
+  --ink-3: #7A8597;          /* muted slate */
+  --rust: #5B7BB8;           /* brand accent — steel blue */
+  --rust-2: #3F5A8C;          /* darker steel blue */
+  --moss: #4A6890;            /* secondary accent */
+  --line: rgba(229, 234, 242, 0.14);
+  --line-soft: rgba(229, 234, 242, 0.06);
+  --hot: #5B7BB8;             /* hot deal flag */
+  --good: #4A6890;            /* status */
+
+  /* Typography */
+  --serif: "Fraunces", "Iowan Old Style", "Georgia", serif;
+  --sans: "Manrope", -apple-system, "Inter", "Helvetica Neue", Arial, sans-serif;
+  --mono: "JetBrains Mono", "SF Mono", "Menlo", monospace;
+
+  /* Shadows — hard editorial offsets, no blur */
+  --shadow-card: 6px 6px 0 rgba(0,0,0,0.55);
+  --shadow-card-sm: 3px 3px 0 rgba(0,0,0,0.55);
+  --shadow-soft: 0 1px 0 rgba(0,0,0,0.4), 0 12px 28px -16px rgba(0,0,0,0.6);
+  --radius: 4px;
+  --radius-lg: 10px;
+}
+
+/* Dark mode swap (used on admin) */
+.theme-ink {
+  --paper: #0A1020;
+  --paper-2: #131B30;
+  --paper-3: #1C2640;
+  --ink: #E5EAF2;
+  --ink-2: #B4BDCC;
+  --ink-3: #7A8597;
+  --line: rgba(229,234,242,0.14);
+  --line-soft: rgba(229,234,242,0.06);
+  --shadow-card: 6px 6px 0 rgba(0,0,0,0.6);
+  --shadow-card-sm: 3px 3px 0 rgba(0,0,0,0.6);
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  font-family: var(--sans);
+  background: var(--paper);
+  color: var(--ink);
+  font-size: 16px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+img { display: block; max-width: 100%; }
+
+.serif { font-family: var(--serif); font-optical-sizing: auto; font-variation-settings: "SOFT" 30, "WONK" 0; }
+.mono { font-family: var(--mono); }
+.sans { font-family: var(--sans); }
+
+.kicker {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-family: var(--sans);
+  font-weight: 600;
+  font-size: 14px;
+  padding: 12px 18px;
+  border-radius: var(--radius);
+  border: 1.5px solid var(--ink);
+  background: var(--paper);
+  color: var(--ink);
+  cursor: pointer;
+  transition: transform 80ms ease, box-shadow 80ms ease;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.btn:hover { transform: translate(-1px, -1px); box-shadow: var(--shadow-card-sm); }
+.btn:active { transform: translate(0,0); box-shadow: none; }
+.btn-primary { background: var(--ink); color: var(--paper); }
+.btn-rust { background: var(--rust); color: #EEF1F5; border-color: var(--rust-2); }
+.btn-ghost { border-color: var(--line); }
+.btn-sm { font-size: 12px; padding: 8px 12px; }
+
+.chip {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-family: var(--mono);
+  font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase;
+  padding: 4px 8px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--paper);
+  color: var(--ink-2);
+}
+.chip-solid { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+.chip-rust { background: var(--rust); color: #EEF1F5; border-color: var(--rust-2); }
+.chip-hot { background: var(--hot); color: #EEF1F5; border-color: var(--hot); }
+
+.card {
+  background: var(--paper);
+  border: 1.5px solid var(--ink);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-card);
+}
+
+.divider { height: 1px; background: var(--line); border: 0; margin: 0; }
+.divider-thick { height: 2px; background: var(--ink); border: 0; }
+
+input, textarea, select {
+  font-family: var(--sans);
+  font-size: 14px;
+  color: var(--ink);
+  background: var(--paper);
+  border: 1.5px solid var(--ink);
+  border-radius: var(--radius);
+  padding: 10px 12px;
+  outline: none;
+  width: 100%;
+}
+input:focus, textarea:focus, select:focus {
+  box-shadow: 3px 3px 0 var(--ink);
+  transform: translate(-1px, -1px);
+}
+label { font-family: var(--mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-2); display:block; margin-bottom: 6px; }
+
+/* Inventory placeholder photo: flat tone wash, never an SVG illustration */
+.car-photo {
+  position: relative;
+  background: linear-gradient(160deg, oklch(0.62 0.04 var(--hue,250) / 1) 0%, oklch(0.32 0.05 var(--hue,250) / 1) 100%);
+  overflow: hidden;
+  border-radius: 2px;
+}
+.car-photo::before {
+  /* subtle stripe wash so it reads "image placeholder" not "color block" */
+  content: "";
+  position: absolute; inset: 0;
+  background-image: repeating-linear-gradient(135deg, rgba(255,255,255,0.06) 0 2px, transparent 2px 14px);
+  pointer-events: none;
+}
+.car-photo .photo-tag {
+  position: absolute; left: 10px; bottom: 10px;
+  font-family: var(--mono); font-size: 10px; letter-spacing: 0.1em;
+  color: rgba(255,255,255,0.85);
+  background: rgba(0,0,0,0.35);
+  padding: 4px 8px; border-radius: 2px;
+  text-transform: uppercase;
+}
+.car-photo .photo-watermark {
+  position: absolute; right: 10px; top: 10px;
+  font-family: var(--serif); font-size: 12px; font-style: italic;
+  color: rgba(255,255,255,0.7);
+}
+
+/* Scrollbars on carousels */
+.carousel-scroll {
+  display: flex; gap: 16px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  padding: 4px 0 18px;
+  scrollbar-width: thin;
+  scrollbar-color: var(--ink-3) transparent;
+}
+.carousel-scroll > * { scroll-snap-align: start; flex: 0 0 auto; }
+.carousel-scroll::-webkit-scrollbar { height: 6px; }
+.carousel-scroll::-webkit-scrollbar-thumb { background: var(--ink-3); border-radius: 999px; }
+
+/* Number ticker for stats */
+.tick {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: 56px;
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+}
+
+/* admin tables */
+.table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.table th {
+  text-align: left;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  padding: 10px 12px;
+  border-bottom: 1.5px solid var(--ink);
+}
+.table td { padding: 14px 12px; border-bottom: 1px solid var(--line-soft); vertical-align: middle; }
+.table tr:hover td { background: rgba(229,234,242,0.04); }
+
+/* phone bezel for mobile artboard */
+.phone-bezel {
+  width: 390px;
+  height: 844px;
+  border: 12px solid #0B1322;
+  border-radius: 48px;
+  background: var(--paper);
+  box-shadow: 0 0 0 2px var(--paper-3), 8px 8px 0 var(--ink);
+  overflow: hidden;
+  position: relative;
+}
+.phone-notch {
+  position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+  width: 110px; height: 28px; background: #0B1322;
+  border-radius: 0 0 18px 18px;
+  z-index: 50;
+}
+.phone-screen {
+  width: 100%; height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-width: none;
+}
+.phone-screen::-webkit-scrollbar { display: none; }
+
+/* Status badge */
+.badge {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-family: var(--mono); font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase;
+  padding: 3px 8px; border-radius: 2px;
+  background: var(--paper-3); color: var(--ink);
+}
+.badge-new { background: var(--hot); color: #EEF1F5; }
+.badge-live { background: var(--good); color: #EEF1F5; }
+.badge-draft { background: var(--paper-3); color: var(--ink-2); }
+.badge-sold { background: var(--ink-3); color: var(--paper); }
+.badge-contacted { background: var(--ink-3); color: var(--paper); }
+.badge-appt { background: var(--moss); color: #EEF1F5; }
+.badge-won { background: var(--good); color: #EEF1F5; }
+
+/* Editorial number markers */
+.section-num {
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 400;
+  color: var(--rust);
+  font-size: 14px;
+}
+
+/* Annotation pin (used in dev handoff mode) */
+.anno {
+  position: absolute;
+  background: var(--rust);
+  color: #EEF1F5;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  padding: 3px 6px;
+  border-radius: 2px;
+  border: 1px solid var(--rust-2);
+  z-index: 80;
+  pointer-events: none;
+  white-space: nowrap;
+}
